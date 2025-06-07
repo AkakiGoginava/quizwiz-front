@@ -1,6 +1,6 @@
 import React from "react";
-import logoBig from "@/assets/images/logoBig.png";
-import landingImg from "@/assets/images/landingImg.png";
+import logoBig from "@/assets/images/logo-big.png";
+import landingImg from "@/assets/images/landing-img.png";
 
 function Landing() {
   return (

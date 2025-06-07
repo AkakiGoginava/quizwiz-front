@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Header from "@/layout/Header.jsx";
-import Footer from "@/layout/Footer.jsx";
+import { Header, Footer } from "@/components/layout";
 
 function Layout({ children }) {
   return (

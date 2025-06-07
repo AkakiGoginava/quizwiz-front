@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 function Footer() {
   return (
-    <footer className="relative flex gap-25 text-gray-600 text-sm px-19 pt-11 pb-20">
+    <footer className="relative flex gap-25 text-gray-600 text-sm px-24 pt-11 pb-20">
       <div>
         <img className="w-23 h-5" src={logo} alt="logo" />
       </div>
