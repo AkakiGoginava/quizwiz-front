@@ -2,11 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import logo from "@/assets/images/logo.png";
 import arrowIcon from "@/assets/images/arrow-icon.png";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-function AuthLayout({ coverImg, children }) {
-  const navigate = useNavigate();
-
+function AuthLayout({ coverImg, children, navigate }) {
   return (
     <div className="flex gap-16.5">
       <Link to="/" className="absolute top-10 left-10">
@@ -33,9 +31,11 @@ function AuthLayout({ coverImg, children }) {
     </div>
   );
 }
+
 AuthLayout.propTypes = {
   coverImg: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
+  navigate: PropTypes.func.isRequired,
 };
 
 export default AuthLayout;

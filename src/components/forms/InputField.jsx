@@ -27,8 +27,10 @@ function InputField({
 
       <div className="relative">
         <input
-          className={`w-full px-4 py-3.5 border border-[#D0D5DD] rounded-[0.625rem] focus:outline-none focus:border-[#BCC7FF] 
-                      ${error && "border-red-500"}`}
+          className={`w-full px-4 py-3.5 border border-[#D0D5DD] rounded-[0.625rem] 
+            focus:outline-none focus:ring-3 focus:ring-blue-300
+            ${error ? "border-red-500 focus:ring-red-300" : ""}
+          `}
           id={name}
           type={inputType}
           placeholder={placeholder}
@@ -40,7 +42,7 @@ function InputField({
 
           {type === "password" && (
             <button
-              onClick={() => toggleHide(type)}
+              onClick={toggleHide}
               className="hover:cursor-pointer"
               type="button"
             >

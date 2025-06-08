@@ -1,10 +1,13 @@
 import React from "react";
 import coverImg from "@/assets/images/register-cover.png";
-import { AuthForm } from "@/components/forms";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import { AuthForm } from "@/components/forms";
+import { useMutation } from "@tanstack/react-query";
 import AuthLayout from "@/components/authLayout/AuthLayout";
+import registerUser from "@/services/registerUser";
 
-function Register() {
+function Register({ navigate }) {
   const registerFields = [
     {
       name: "name",
@@ -24,7 +27,13 @@ function Register() {
       label: "Email",
       type: "email",
       placeholder: "Example@gmail.com",
-      rules: { required: "Email is required" },
+      rules: {
+        required: "Email is required",
+        pattern: {
+          value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+          message: "Invalid email address",
+        },
+      },
     },
     {
       name: "password",
@@ -56,12 +65,26 @@ function Register() {
     },
   ];
 
+  const mutation = useMutation({
+    mutationFn: registerUser,
+    onSuccess: (data) => {
+      console.log(data);
+    },
+    onError: (error) => {
+      console.log(error);
+    },
+  });
+
+  const handleRegister = (formData) => {
+    mutation.mutate(formData);
+  };
+
   return (
-    <AuthLayout coverImg={coverImg}>
+    <AuthLayout coverImg={coverImg} navigate={navigate}>
       <div className="flex flex-col gap-9.5">
         <AuthForm
           fields={registerFields}
-          onSubmit=""
+          onSubmit={handleRegister}
           submitText="Register"
           title="Create account"
         />
@@ -79,5 +102,9 @@ function Register() {
     </AuthLayout>
   );
 }
+
+Register.propTypes = {
+  navigate: PropTypes.func.isRequired,
+};
 
 export default Register;

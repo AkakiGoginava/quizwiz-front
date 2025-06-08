@@ -16,6 +16,7 @@ function AuthForm({ fields, onSubmit, submitText = "Submit", title = "" }) {
     <form
       onSubmit={handleSubmit(onSubmit)}
       className="flex flex-col gap-10 w-106.5"
+      noValidate
     >
       <h1 className="text-3xl font-extrabold">{title}</h1>
 
