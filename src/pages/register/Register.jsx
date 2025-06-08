@@ -4,8 +4,8 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { AuthForm } from "@/components/forms";
 import AuthLayout from "@/components/authLayout/AuthLayout";
-import registerUser from "@/services/registerUser";
-import { useInputValidator, useAuthMutation } from "@/hooks";
+import { registerUser } from "@/services";
+import { useInputValidator, useAuthMutation } from "@/hook";
 
 function Register({ navigate }) {
   const validateInput = useInputValidator();
@@ -69,7 +69,9 @@ function Register({ navigate }) {
     },
   ];
 
-  const handleRegister = useAuthMutation(registerUser);
+  const handleRegister = useAuthMutation(registerUser, {
+    onSuccess: () => navigate("/"),
+  });
 
   return (
     <AuthLayout coverImg={coverImg} navigate={navigate}>

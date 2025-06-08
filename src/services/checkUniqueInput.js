@@ -1,4 +1,4 @@
-import axiosInstance from "./axios.js";
+import { axiosInstance } from "./";
 
 async function checkUniqueInput(field, value) {
   const response = await axiosInstance.get("/api/check-unique", {

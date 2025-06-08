@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import checkUniqueInput from "@/services/checkUniqueInput";
+import { checkUniqueInput } from "@/services";
 
 function useInputValidator() {
   const timeoutRef = useRef(null);

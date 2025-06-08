@@ -4,7 +4,7 @@ import landingImg from "@/assets/images/landing-img.png";
 
 function Landing() {
   return (
-    <>
+    <div className="flex flex-col">
       <img className="h-75 w-165 mt-7 mb-28 ml-24" src={logoBig} />
 
       <div className="flex flex-col justify-center w-full bg-[#FF5613] text-white font-['Raleway'] pl-24 pt-8 pb-14.5">
@@ -18,7 +18,7 @@ function Landing() {
       </div>
 
       <img className="absolute bottom-0 right-0" src={landingImg} />
-    </>
+    </div>
   );
 }
 

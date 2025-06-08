@@ -1,4 +1,4 @@
-import axiosInstance from "./axios.js";
+import { axiosInstance } from "./";
 
 async function registerUser(formData) {
   await axiosInstance.get("/sanctum/csrf-cookie");

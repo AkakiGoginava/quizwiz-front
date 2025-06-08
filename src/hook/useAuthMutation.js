@@ -1,8 +1,9 @@
 import { useMutation } from "@tanstack/react-query";
 
-function useAuthMutation(mutationFn) {
+function useAuthMutation(mutationFn, options = {}) {
   const mutation = useMutation({
     mutationFn,
+    ...options,
     onSuccess: (data) => {
       console.log(data);
     },
@@ -13,6 +14,9 @@ function useAuthMutation(mutationFn) {
 
   return (formData, setError) => {
     mutation.mutate(formData, {
+      onSuccess: (data) => {
+        if (options.onSuccess) options.onSuccess(data);
+      },
       onError: (error) => {
         if (
           error.response &&
@@ -24,6 +28,8 @@ function useAuthMutation(mutationFn) {
             setError(field, { type: "server", message: messages[0] });
           });
         }
+
+        if (options.onError) options.onError(error);
       },
     });
   };
