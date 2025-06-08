@@ -3,7 +3,7 @@ import axiosInstance from "./axios.js";
 async function registerUser(formData) {
   await axiosInstance.get("/sanctum/csrf-cookie");
 
-  const response = await axiosInstance.post("/register", formData);
+  const response = await axiosInstance.post("/api/register", formData);
 
   return response;
 }
