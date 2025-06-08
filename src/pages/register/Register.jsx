@@ -6,8 +6,21 @@ import { AuthForm } from "@/components/forms";
 import { useMutation } from "@tanstack/react-query";
 import AuthLayout from "@/components/authLayout/AuthLayout";
 import registerUser from "@/services/registerUser";
+import { useInputValidator } from "@/hooks";
 
 function Register({ navigate }) {
+  const validateInput = useInputValidator();
+
+  const mutation = useMutation({
+    mutationFn: registerUser,
+    onSuccess: (data) => {
+      console.log(data);
+    },
+    onError: (error) => {
+      console.log(error);
+    },
+  });
+
   const registerFields = [
     {
       name: "name",
@@ -20,6 +33,7 @@ function Register({ navigate }) {
           value: 3,
           message: "Name must be at least 3 characters long",
         },
+        validate: (value) => validateInput("name", value),
       },
     },
     {
@@ -33,6 +47,7 @@ function Register({ navigate }) {
           value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
           message: "Invalid email address",
         },
+        validate: (value) => validateInput("email", value),
       },
     },
     {
@@ -65,18 +80,21 @@ function Register({ navigate }) {
     },
   ];
 
-  const mutation = useMutation({
-    mutationFn: registerUser,
-    onSuccess: (data) => {
-      console.log(data);
-    },
-    onError: (error) => {
-      console.log(error);
-    },
-  });
-
-  const handleRegister = (formData) => {
-    mutation.mutate(formData);
+  const handleRegister = (formData, setError) => {
+    mutation.mutate(formData, {
+      onError: (error) => {
+        if (
+          error.response &&
+          error.response.data &&
+          error.response.data.errors
+        ) {
+          const errors = error.response.data.errors;
+          Object.entries(errors).forEach(([field, messages]) => {
+            setError(field, { type: "server", message: messages[0] });
+          });
+        }
+      },
+    });
   };
 
   return (

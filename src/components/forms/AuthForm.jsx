@@ -7,14 +7,15 @@ function AuthForm({ fields, onSubmit, submitText = "Submit", title = "" }) {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
+    setError,
   } = useForm({
     mode: "onChange",
   });
 
   return (
     <form
-      onSubmit={handleSubmit(onSubmit)}
+      onSubmit={handleSubmit((data) => onSubmit(data, setError))}
       className="flex flex-col gap-10 w-106.5"
       noValidate
     >
@@ -48,7 +49,8 @@ function AuthForm({ fields, onSubmit, submitText = "Submit", title = "" }) {
 
       <button
         type="submit"
-        className="text-white bg-black rounded-[0.625rem] py-4 font-semibold transition hover:cursor-pointer hover:opacity-85"
+        className="text-white bg-black rounded-[0.625rem] py-4 font-semibold transition hover:cursor-pointer hover:opacity-85 disabled:opacity-70 disabled:cursor-progress"
+        disabled={isSubmitting}
       >
         {submitText}
       </button>
