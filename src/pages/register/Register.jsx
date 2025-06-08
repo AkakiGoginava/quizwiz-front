@@ -3,23 +3,12 @@ import coverImg from "@/assets/images/register-cover.png";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { AuthForm } from "@/components/forms";
-import { useMutation } from "@tanstack/react-query";
 import AuthLayout from "@/components/authLayout/AuthLayout";
 import registerUser from "@/services/registerUser";
-import { useInputValidator } from "@/hooks";
+import { useInputValidator, useAuthMutation } from "@/hooks";
 
 function Register({ navigate }) {
   const validateInput = useInputValidator();
-
-  const mutation = useMutation({
-    mutationFn: registerUser,
-    onSuccess: (data) => {
-      console.log(data);
-    },
-    onError: (error) => {
-      console.log(error);
-    },
-  });
 
   const registerFields = [
     {
@@ -80,22 +69,7 @@ function Register({ navigate }) {
     },
   ];
 
-  const handleRegister = (formData, setError) => {
-    mutation.mutate(formData, {
-      onError: (error) => {
-        if (
-          error.response &&
-          error.response.data &&
-          error.response.data.errors
-        ) {
-          const errors = error.response.data.errors;
-          Object.entries(errors).forEach(([field, messages]) => {
-            setError(field, { type: "server", message: messages[0] });
-          });
-        }
-      },
-    });
-  };
+  const handleRegister = useAuthMutation(registerUser);
 
   return (
     <AuthLayout coverImg={coverImg} navigate={navigate}>
