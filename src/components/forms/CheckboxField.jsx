@@ -10,7 +10,7 @@ function CheckboxField({ name, label, register, rules, error }) {
         name={name}
         id={name}
         {...register(name, rules)}
-        className="w-5 h-5 accent-black border-gray-300 focus:ring-black"
+        className="rounded-full w-5 h-5 focus:ring-0 text-black"
       />
 
       <label htmlFor={name} className="text-sm text-[#344054]">
