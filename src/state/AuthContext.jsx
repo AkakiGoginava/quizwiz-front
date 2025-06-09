@@ -1,12 +1,14 @@
 import React, { createContext } from "react";
 import PropTypes from "prop-types";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { loginUser, logoutUser, fetchUser } from "@/services";
+import { registerUser, loginUser, logoutUser, fetchUser } from "@/services";
+import { useAuthMutation } from "@/hook";
+import { useNavigate } from "react-router-dom";
 
 export const AuthContext = createContext();
-
 export function AuthProvider({ children }) {
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
   const { data: user, isLoading } = useQuery({
     queryKey: ["user"],
@@ -15,27 +17,41 @@ export function AuthProvider({ children }) {
     staleTime: Infinity,
   });
 
-  const login = async (credentials) => {
-    const res = await loginUser(credentials);
-    queryClient.setQueryData(["user"], res.data);
-  };
+  const handleRegister = useAuthMutation(registerUser, {
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["user"] });
 
-  const logout = async () => {
-    try {
-      const response = await logoutUser();
+      navigate("/");
+    },
+  });
+
+  const handleLogin = useAuthMutation(loginUser, {
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["user"] });
+
+      navigate("/quizzes");
+    },
+  });
+
+  const handleLogout = useAuthMutation(logoutUser, {
+    onSuccess: (data) => {
       queryClient.setQueryData(["user"], null);
-      console.log("Logout successful!", response.data);
-    } catch (error) {
+      console.log("Logout successful!", data);
+
+      navigate("/");
+    },
+    onError: (error) => {
       console.error("Logout failed:", error);
-    }
-  };
+    },
+  });
 
   return (
     <AuthContext.Provider
       value={{
         user,
-        login,
-        logout,
+        register: handleRegister,
+        login: handleLogin,
+        logout: handleLogout,
         isAuthenticated: !!user,
         isLoading,
       }}

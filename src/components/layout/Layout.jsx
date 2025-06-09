@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Header, Footer } from "./";
 import { useLocation } from "react-router-dom";
 
-function Layout({ navigate, children }) {
+function Layout({ children }) {
   const { pathname } = useLocation();
 
   const noLayoutPaths = [
@@ -17,7 +17,7 @@ function Layout({ navigate, children }) {
 
   return (
     <div className="min-h-screen flex flex-col">
-      {!hideLayout && <Header navigate={navigate} />}
+      {!hideLayout && <Header />}
       <main className="flex flex-1 relative min-h-screen items-center">
         {children}
       </main>
@@ -27,7 +27,6 @@ function Layout({ navigate, children }) {
 }
 
 Layout.propTypes = {
-  navigate: PropTypes.func,
   children: PropTypes.node.isRequired,
 };
 

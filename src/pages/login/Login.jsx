@@ -1,8 +1,10 @@
 import React from "react";
-import coverImg from "@/assets/images/login-cover.png";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import coverImg from "@/assets/images/login-cover.png";
 import AuthLayout from "@/components/authLayout/AuthLayout";
 import AuthForm from "@/components/forms/AuthForm";
+import { useAuth } from "@/hook";
 
 function Login({ navigate }) {
   const loginFields = [
@@ -35,12 +37,14 @@ function Login({ navigate }) {
     },
   ];
 
+  const { login } = useAuth();
+
   return (
     <AuthLayout coverImg={coverImg} navigate={navigate}>
       <div className="flex flex-col gap-9.5">
         <AuthForm
           fields={loginFields}
-          onSubmit=""
+          onSubmit={login}
           submitText="Log in"
           title="Hi, Welcome! 👋"
         />
@@ -58,5 +62,9 @@ function Login({ navigate }) {
     </AuthLayout>
   );
 }
+
+Login.propTypes = {
+  navigate: PropTypes.func.isRequired,
+};
 
 export default Login;

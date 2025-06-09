@@ -4,13 +4,12 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { AuthForm } from "@/components/forms";
 import AuthLayout from "@/components/authLayout/AuthLayout";
-import { registerUser } from "@/services";
-import { useInputValidator, useAuthMutation } from "@/hook";
-import { useQueryClient } from "@tanstack/react-query";
+import { useInputValidator, useAuth } from "@/hook";
 
 function Register({ navigate }) {
   const validateInput = useInputValidator();
-  const queryClient = useQueryClient();
+
+  const { register } = useAuth();
 
   const registerFields = [
     {
@@ -71,19 +70,12 @@ function Register({ navigate }) {
     },
   ];
 
-  const handleRegister = useAuthMutation(registerUser, {
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["user"] });
-      navigate("/");
-    },
-  });
-
   return (
     <AuthLayout coverImg={coverImg} navigate={navigate}>
       <div className="flex flex-col gap-9.5">
         <AuthForm
           fields={registerFields}
-          onSubmit={handleRegister}
+          onSubmit={register}
           submitText="Register"
           title="Create account"
         />
