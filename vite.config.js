@@ -13,4 +13,8 @@ export default defineConfig({
   resolve: {
     alias: [{ find: "@", replacement: path.resolve(__dirname, "src") }],
   },
+  server: {
+    host: "app.local.test",
+    port: 5173,
+  },
 });

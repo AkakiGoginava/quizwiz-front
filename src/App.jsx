@@ -8,7 +8,7 @@ function App() {
   const navigate = useNavigate();
 
   return (
-    <Layout>
+    <Layout navigate={navigate}>
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/register" element={<Register navigate={navigate} />} />

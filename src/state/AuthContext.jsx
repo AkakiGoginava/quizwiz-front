@@ -21,8 +21,13 @@ export function AuthProvider({ children }) {
   };
 
   const logout = async () => {
-    await logoutUser();
-    queryClient.setQueryData(["user"], null);
+    try {
+      const response = await logoutUser();
+      queryClient.setQueryData(["user"], null);
+      console.log("Logout successful!", response.data);
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
   };
 
   return (

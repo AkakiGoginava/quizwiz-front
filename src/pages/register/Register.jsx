@@ -6,9 +6,11 @@ import { AuthForm } from "@/components/forms";
 import AuthLayout from "@/components/authLayout/AuthLayout";
 import { registerUser } from "@/services";
 import { useInputValidator, useAuthMutation } from "@/hook";
+import { useQueryClient } from "@tanstack/react-query";
 
 function Register({ navigate }) {
   const validateInput = useInputValidator();
+  const queryClient = useQueryClient();
 
   const registerFields = [
     {
@@ -70,7 +72,10 @@ function Register({ navigate }) {
   ];
 
   const handleRegister = useAuthMutation(registerUser, {
-    onSuccess: () => navigate("/"),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["user"] });
+      navigate("/");
+    },
   });
 
   return (
