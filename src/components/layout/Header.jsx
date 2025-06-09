@@ -28,7 +28,7 @@ function Header({ navigate }) {
         ) : (
           <>
             <Link to="/register">Sign up</Link>
-            <Link>Log in</Link>{" "}
+            <Link to="/login">Log in</Link>{" "}
           </>
         )}
       </div>
