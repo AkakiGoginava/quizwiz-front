@@ -7,6 +7,8 @@ import {
   logoutUser,
   fetchUser,
   verifyEmail,
+  forgotPassword,
+  resetPassword,
 } from "@/services";
 import { useAuthMutation } from "@/hook";
 import { useNavigate } from "react-router-dom";
@@ -29,16 +31,12 @@ export function AuthProvider({ children }) {
 
       navigate("/");
     },
+    onError: (error) => {
+      console.error("Registration failed:", error);
+    },
   });
 
-  const handleVerify = useAuthMutation(verifyEmail, {
-    onSuccess: (data) => {
-      console.log("verified:", data);
-    },
-    onError: (error) => {
-      console.log("error verificating:", error);
-    },
-  });
+  const handleVerify = useAuthMutation(verifyEmail);
 
   const handleLogin = useAuthMutation(loginUser, {
     onSuccess: async () => {
@@ -54,6 +52,9 @@ export function AuthProvider({ children }) {
 
       navigate("/quizzes");
     },
+    onError: (error) => {
+      console.error("Login failed:", error);
+    },
   });
 
   const handleLogout = useAuthMutation(logoutUser, {
@@ -68,6 +69,26 @@ export function AuthProvider({ children }) {
     },
   });
 
+  const handleForgotPassword = useAuthMutation(forgotPassword, {
+    onSuccess: (data) => {
+      console.log("Forgot password request successful!", data);
+    },
+    onError: (error) => {
+      console.error("Forgot password request failed:", error);
+    },
+  });
+
+  const handleResetPassword = useAuthMutation(resetPassword, {
+    onSuccess: (data) => {
+      console.log("Password reset successful!", data);
+
+      navigate("/");
+    },
+    onError: (error) => {
+      console.error("Password reset failed:", error);
+    },
+  });
+
   return (
     <AuthContext.Provider
       value={{
@@ -75,6 +96,8 @@ export function AuthProvider({ children }) {
         register: handleRegister,
         login: handleLogin,
         logout: handleLogout,
+        forgotPassword: handleForgotPassword,
+        resetPassword: handleResetPassword,
         isAuthenticated: !!user,
         isLoading,
       }}

@@ -2,8 +2,17 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useForm } from "react-hook-form";
 import { InputField, CheckboxField } from "./";
+import { Link } from "react-router-dom";
 
-function AuthForm({ fields, onSubmit, submitText = "Submit", title = "" }) {
+function AuthForm({
+  fields,
+  onSubmit,
+  submitText = "Submit",
+  title = "",
+  subTitle = "",
+  hasForgotPassword = false,
+  children,
+}) {
   const {
     register,
     handleSubmit,
@@ -19,19 +28,32 @@ function AuthForm({ fields, onSubmit, submitText = "Submit", title = "" }) {
       className="flex flex-col gap-10 w-106.5"
       noValidate
     >
-      <h1 className="text-3xl font-extrabold">{title}</h1>
+      <div className="flex flex-col gap-4">
+        <h1 className="text-3xl font-extrabold">{title}</h1>
+        <h3 className="text-sm text-[#475467]">{subTitle}</h3>
+      </div>
 
       <div className="flex flex-col gap-6">
         {fields.map((field) =>
           field.type === "checkbox" ? (
-            <CheckboxField
-              key={field.name}
-              name={field.name}
-              label={field.label}
-              rules={field.rules}
-              register={register}
-              error={errors[field.name]}
-            />
+            <div key={field.name} className="flex">
+              <CheckboxField
+                name={field.name}
+                label={field.label}
+                rules={field.rules}
+                register={register}
+                error={errors[field.name]}
+              />
+
+              {hasForgotPassword && (
+                <Link
+                  to="/forgot-password"
+                  className="ml-auto text-sm text-[#344054]"
+                >
+                  Forgot password?
+                </Link>
+              )}
+            </div>
           ) : (
             <InputField
               key={field.name}
@@ -45,6 +67,13 @@ function AuthForm({ fields, onSubmit, submitText = "Submit", title = "" }) {
             />
           )
         )}
+
+        {children &&
+          React.Children.map(children, (child) =>
+            React.isValidElement(child)
+              ? React.cloneElement(child, { register })
+              : child
+          )}
       </div>
 
       <button
@@ -71,6 +100,9 @@ AuthForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   submitText: PropTypes.string,
   title: PropTypes.string,
+  subTitle: PropTypes.string,
+  hasForgotPassword: PropTypes.bool,
+  children: PropTypes.node,
 };
 
 export default AuthForm;

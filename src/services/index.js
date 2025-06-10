@@ -5,3 +5,5 @@ export { default as loginUser } from "./loginUser.js";
 export { default as logoutUser } from "./logoutUser.js";
 export { default as registerUser } from "./registerUser.js";
 export { default as verifyEmail } from "./verifyEmail.js";
+export { default as resetPassword } from "./resetPassword.js";
+export { default as forgotPassword } from "./forgotPassword.js";

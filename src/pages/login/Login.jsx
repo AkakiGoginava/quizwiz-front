@@ -47,6 +47,7 @@ function Login({ navigate }) {
           onSubmit={login}
           submitText="Log in"
           title="Hi, Welcome! 👋"
+          hasForgotPassword={true}
         />
 
         <p className="text-sm text-gray-900">
