@@ -7,6 +7,7 @@ import Register from "@/pages/register/Register";
 import Login from "@/pages/login/Login";
 import ResetPassword from "@/pages/resetPassword/ResetPassword";
 import ForgotPassword from "@/pages/forgotPassword/ForgotPassword";
+import { AuthRoute, GuestRoute, TokenGuard } from "@/components/routes";
 
 function App() {
   const navigate = useNavigate();
@@ -15,15 +16,38 @@ function App() {
     <Layout>
       <Routes>
         <Route path="/" element={<Landing />} />
-        <Route path="/register" element={<Register navigate={navigate} />} />
-        <Route path="/login" element={<Login navigate={navigate} />} />
+        <Route
+          path="/register"
+          element={
+            <GuestRoute>
+              <Register navigate={navigate} />
+            </GuestRoute>
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <GuestRoute>
+              {" "}
+              <Login navigate={navigate} />
+            </GuestRoute>
+          }
+        />
         <Route
           path="/forgot-password"
-          element={<ForgotPassword navigate={navigate} />}
+          element={
+            <GuestRoute>
+              <ForgotPassword navigate={navigate} />{" "}
+            </GuestRoute>
+          }
         />
         <Route
           path="/reset-password"
-          element={<ResetPassword navigate={navigate} />}
+          element={
+            <TokenGuard>
+              <ResetPassword navigate={navigate} />
+            </TokenGuard>
+          }
         />
       </Routes>
     </Layout>
