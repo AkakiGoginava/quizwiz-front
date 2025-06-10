@@ -4,3 +4,4 @@ export { default as fetchUser } from "./fetchUser.js";
 export { default as loginUser } from "./loginUser.js";
 export { default as logoutUser } from "./logoutUser.js";
 export { default as registerUser } from "./registerUser.js";
+export { default as verifyEmail } from "./verifyEmail.js";

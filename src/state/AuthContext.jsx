@@ -1,7 +1,13 @@
 import React, { createContext } from "react";
 import PropTypes from "prop-types";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { registerUser, loginUser, logoutUser, fetchUser } from "@/services";
+import {
+  registerUser,
+  loginUser,
+  logoutUser,
+  fetchUser,
+  verifyEmail,
+} from "@/services";
 import { useAuthMutation } from "@/hook";
 import { useNavigate } from "react-router-dom";
 
@@ -25,9 +31,26 @@ export function AuthProvider({ children }) {
     },
   });
 
+  const handleVerify = useAuthMutation(verifyEmail, {
+    onSuccess: (data) => {
+      console.log("verified:", data);
+    },
+    onError: (error) => {
+      console.log("error verificating:", error);
+    },
+  });
+
   const handleLogin = useAuthMutation(loginUser, {
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["user"] });
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ["user"] });
+
+      const searchParams = new URLSearchParams(location.search);
+      const id = searchParams.get("verify_id");
+      const hash = searchParams.get("verify_hash");
+
+      if (id && hash) {
+        handleVerify({ id, hash }, () => {});
+      }
 
       navigate("/quizzes");
     },

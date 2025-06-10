@@ -1,7 +1,8 @@
 import React from "react";
-import Landing from "@/pages/landing/Landing";
-import { Layout } from "@/components/layout";
 import { Routes, Route, useNavigate } from "react-router-dom";
+
+import { Layout } from "@/components/layout";
+import Landing from "@/pages/landing/Landing";
 import Register from "@/pages/register/Register";
 import Login from "@/pages/login/Login";
 
