@@ -17,6 +17,7 @@ export const AuthContext = createContext();
 export function AuthProvider({ children }) {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
 
   const { data: user, isLoading } = useQuery({
     queryKey: ["user"],
@@ -42,7 +43,6 @@ export function AuthProvider({ children }) {
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ["user"] });
 
-      const [searchParams] = useSearchParams();
       const id = searchParams.get("verify_id");
       const hash = searchParams.get("verify_hash");
 
