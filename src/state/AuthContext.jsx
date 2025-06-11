@@ -11,7 +11,7 @@ import {
   resetPassword,
 } from "@/services";
 import { useAuthMutation } from "@/hook";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 export const AuthContext = createContext();
 export function AuthProvider({ children }) {
@@ -42,7 +42,7 @@ export function AuthProvider({ children }) {
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ["user"] });
 
-      const searchParams = new URLSearchParams(location.search);
+      const [searchParams] = useSearchParams();
       const id = searchParams.get("verify_id");
       const hash = searchParams.get("verify_hash");
 
