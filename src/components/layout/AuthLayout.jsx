@@ -1,10 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 import logo from "@/assets/images/logo.png";
-import arrowIcon from "@/assets/images/arrow-icon.png";
-import { Link } from "react-router-dom";
+import ArrowIcon from "@/assets/svg/arrow-icon.svg?react";
+import { Link, useNavigate } from "react-router-dom";
 
-function AuthLayout({ coverImg, children, navigate }) {
+function AuthLayout({ coverImg, children }) {
+  const navigate = useNavigate();
+
   return (
     <div className="flex gap-16.5">
       <Link to="/" className="absolute top-10 left-10">
@@ -21,9 +23,9 @@ function AuthLayout({ coverImg, children, navigate }) {
         <button
           onClick={() => navigate(-1)}
           type="button"
-          className="flex gap-2 mb-12 mt-11 font-medium text-[#667085] items-center hover:cursor-pointer hover:opacity-85"
+          className="flex gap-2 mb-12 mt-11 font-medium text-gray-500 items-center hover:cursor-pointer hover:opacity-85"
         >
-          <img src={arrowIcon} alt="arrow icon" />
+          <ArrowIcon />
           Back
         </button>
         <div className="pl-6">{children}</div>
@@ -35,7 +37,6 @@ function AuthLayout({ coverImg, children, navigate }) {
 AuthLayout.propTypes = {
   coverImg: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
-  navigate: PropTypes.func.isRequired,
 };
 
 export default AuthLayout;

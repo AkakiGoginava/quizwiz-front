@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import alertCircle from "@/assets/images/alert-circle.png";
-import eyeIcon from "@/assets/images/eye-icon.png";
-import { InputErrorMessage } from "./";
+import AlertIcon from "@/assets/svg/alert-icon.svg?react";
+import EyeIcon from "@/assets/svg/eye-icon.svg?react";
+import CrossedEyeIcon from "@/assets/svg/crossed-eye-icon.svg?react";
+import { InputErrorMessage } from "@/components";
+import { cn } from "@/helper";
 
 function InputField({
   name,
@@ -21,16 +23,18 @@ function InputField({
 
   return (
     <div key={name} className="relative flex flex-col gap-1.5">
-      <label htmlFor={name} className="text-sm text-[#344054]">
+      <label htmlFor={name} className="text-sm text-gray">
         {label}
       </label>
 
       <div className="relative">
         <input
-          className={`w-full px-4 py-3.5 border border-[#D0D5DD] rounded-[0.625rem] 
-            focus:outline-none focus:ring-3 focus:ring-blue-300
-            ${error ? "border-red-500 focus:ring-red-300" : ""}
-          `}
+          className={cn(
+            "w-full px-4 py-3.5 border border-light-gray rounded-[0.625rem] focus:outline-none focus:ring-3 focus:ring-blue-300",
+            {
+              "border-red-500 focus:ring-red-300": error,
+            }
+          )}
           id={name}
           type={inputType}
           placeholder={placeholder}
@@ -38,7 +42,7 @@ function InputField({
         />
 
         <div className="absolute top-5 right-4 flex gap-2">
-          {error && <img src={alertCircle} alt="alert icon" />}
+          {error && <AlertIcon />}
 
           {type === "password" && (
             <button
@@ -46,7 +50,7 @@ function InputField({
               className="hover:cursor-pointer"
               type="button"
             >
-              <img src={eyeIcon} alt="eye icon" />
+              {inputType === "password" ? <CrossedEyeIcon /> : <EyeIcon />}
             </button>
           )}
         </div>

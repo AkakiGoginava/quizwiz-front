@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useForm } from "react-hook-form";
-import { InputField, CheckboxField } from "./";
 import { Link } from "react-router-dom";
+import { InputField, CheckboxField } from "@/components";
 
 function AuthForm({
   fields,
@@ -30,7 +30,7 @@ function AuthForm({
     >
       <div className="flex flex-col gap-4">
         <h1 className="text-3xl font-extrabold">{title}</h1>
-        <h3 className="text-sm text-[#475467]">{subTitle}</h3>
+        <h3 className="text-sm text-gray">{subTitle}</h3>
       </div>
 
       <div className="flex flex-col gap-6">
@@ -48,7 +48,7 @@ function AuthForm({
               {hasForgotPassword && (
                 <Link
                   to="/forgot-password"
-                  className="ml-auto text-sm text-[#344054]"
+                  className="ml-auto text-sm text-gray"
                 >
                   Forgot password?
                 </Link>

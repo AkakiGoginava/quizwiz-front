@@ -1,8 +1,7 @@
 import React from "react";
-import PropTypes from "prop-types";
-import { Navigate } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 
-function TokenGuard({ children }) {
+function TokenGuard() {
   const searchParams = new URLSearchParams(window.location.search);
   const token = searchParams.get("token");
 
@@ -10,11 +9,6 @@ function TokenGuard({ children }) {
     return <Navigate to="/forgot-password" />;
   }
 
-  return children;
+  return <Outlet />;
 }
-
-TokenGuard.propTypes = {
-  children: PropTypes.node.isRequired,
-};
-
 export default TokenGuard;

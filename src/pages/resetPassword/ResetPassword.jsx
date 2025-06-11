@@ -1,11 +1,16 @@
 import React from "react";
-import PropTypes from "prop-types";
+import { useSearchParams } from "react-router-dom";
 import coverImg from "@/assets/images/reset-cover.png";
-import AuthLayout from "@/components/authLayout/AuthLayout";
-import AuthForm from "@/components/forms/AuthForm";
+import { AuthLayout, AuthForm } from "@/components";
 import { useAuth } from "@/hook";
 
-function Login({ navigate }) {
+function ResetPassword() {
+  const { resetPassword } = useAuth();
+
+  const [searchParams] = useSearchParams();
+  const token = searchParams.get("token");
+  const email = searchParams.get("email");
+
   const resetFields = [
     {
       name: "password",
@@ -31,14 +36,8 @@ function Login({ navigate }) {
     },
   ];
 
-  const { resetPassword } = useAuth();
-
-  const searchParams = new URLSearchParams(location.search);
-  const token = searchParams.get("token");
-  const email = searchParams.get("email");
-
   return (
-    <AuthLayout coverImg={coverImg} navigate={navigate}>
+    <AuthLayout coverImg={coverImg}>
       <div className="flex flex-col gap-9.5">
         <AuthForm
           fields={resetFields}
@@ -52,8 +51,4 @@ function Login({ navigate }) {
   );
 }
 
-Login.propTypes = {
-  navigate: PropTypes.func.isRequired,
-};
-
-export default Login;
+export default ResetPassword;

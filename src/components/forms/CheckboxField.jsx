@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { InputErrorMessage } from "./";
+import { InputErrorMessage } from "@/components";
 
 function CheckboxField({ name, label, register, rules, error }) {
   return (
@@ -13,7 +13,7 @@ function CheckboxField({ name, label, register, rules, error }) {
         className="rounded-full w-5 h-5 focus:ring-0 text-black"
       />
 
-      <label htmlFor={name} className="text-sm text-[#344054]">
+      <label htmlFor={name} className="text-sm text-gray">
         {label}
       </label>
 

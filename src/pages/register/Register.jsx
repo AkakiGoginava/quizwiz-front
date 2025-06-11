@@ -1,12 +1,10 @@
 import React from "react";
 import coverImg from "@/assets/images/register-cover.png";
-import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import { AuthForm } from "@/components/forms";
-import AuthLayout from "@/components/authLayout/AuthLayout";
+import { AuthLayout, AuthForm } from "@/components";
 import { useInputValidator, useAuth } from "@/hook";
 
-function Register({ navigate }) {
+function Register() {
   const validateInput = useInputValidator();
 
   const { register } = useAuth();
@@ -71,7 +69,7 @@ function Register({ navigate }) {
   ];
 
   return (
-    <AuthLayout coverImg={coverImg} navigate={navigate}>
+    <AuthLayout coverImg={coverImg}>
       <div className="flex flex-col gap-9.5">
         <AuthForm
           fields={registerFields}
@@ -93,9 +91,5 @@ function Register({ navigate }) {
     </AuthLayout>
   );
 }
-
-Register.propTypes = {
-  navigate: PropTypes.func.isRequired,
-};
 
 export default Register;

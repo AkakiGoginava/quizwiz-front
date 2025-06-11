@@ -1,11 +1,11 @@
 import React from "react";
-import PropTypes from "prop-types";
 import coverImg from "@/assets/images/reset-cover.png";
-import AuthLayout from "@/components/authLayout/AuthLayout";
-import AuthForm from "@/components/forms/AuthForm";
+import { AuthLayout, AuthForm } from "@/components";
 import { useAuth } from "@/hook";
 
-function Login({ navigate }) {
+function Login() {
+  const { forgotPassword } = useAuth();
+
   const forgotFields = [
     {
       name: "email",
@@ -22,10 +22,8 @@ function Login({ navigate }) {
     },
   ];
 
-  const { forgotPassword } = useAuth();
-
   return (
-    <AuthLayout coverImg={coverImg} navigate={navigate}>
+    <AuthLayout coverImg={coverImg}>
       <div className="flex flex-col gap-9.5">
         <AuthForm
           fields={forgotFields}
@@ -38,9 +36,5 @@ function Login({ navigate }) {
     </AuthLayout>
   );
 }
-
-Login.propTypes = {
-  navigate: PropTypes.func.isRequired,
-};
 
 export default Login;

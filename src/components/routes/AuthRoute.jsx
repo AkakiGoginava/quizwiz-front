@@ -1,20 +1,15 @@
 import React from "react";
-import PropTypes from "prop-types";
-import { Navigate } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 import { useAuth } from "@/hook";
 
-function AuthRoute({ children }) {
+function AuthRoute() {
   const { isAuthenticated } = useAuth();
 
   if (!isAuthenticated) {
     return <Navigate to="/register" />;
   }
 
-  return children;
+  return <Outlet />;
 }
-
-AuthRoute.propTypes = {
-  children: PropTypes.node.isRequired,
-};
 
 export default AuthRoute;

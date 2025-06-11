@@ -1,7 +1,8 @@
 import { axiosInstance } from "./";
+import { getCsrfCookie } from "@/helper";
 
 async function registerUser(formData) {
-  await axiosInstance.get("/sanctum/csrf-cookie");
+  await getCsrfCookie();
 
   const response = await axiosInstance.post("/api/register", formData);
 

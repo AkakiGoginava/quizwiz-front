@@ -2,6 +2,15 @@
 
 @plugin "@tailwindcss/forms";
 
+@theme {
+  --color-gray: #344054;
+  --color-light-gray: #d0d5dd;
+  --color-orange: #ff5613;
+  --color-blue: #4b69fd;
+
+  --font-raleway: "Raleway", system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
