@@ -1,6 +1,6 @@
 import React from "react";
 import { useSearchParams } from "react-router-dom";
-import coverImg from "@/assets/images/reset-cover.png";
+import { resetCover } from "@/assets";
 import { AuthLayout, AuthForm } from "@/components";
 import { useAuth } from "@/hook";
 
@@ -37,7 +37,7 @@ function ResetPassword() {
   ];
 
   return (
-    <AuthLayout coverImg={coverImg}>
+    <AuthLayout coverImg={resetCover}>
       <div className="flex flex-col gap-9.5">
         <AuthForm
           fields={resetFields}

@@ -1,5 +1,5 @@
 import React from "react";
-import coverImg from "@/assets/images/reset-cover.png";
+import { forgotCover } from "@/assets";
 import { AuthLayout, AuthForm } from "@/components";
 import { useAuth } from "@/hook";
 
@@ -23,7 +23,7 @@ function Login() {
   ];
 
   return (
-    <AuthLayout coverImg={coverImg}>
+    <AuthLayout coverImg={forgotCover}>
       <div className="flex flex-col gap-9.5">
         <AuthForm
           fields={forgotFields}

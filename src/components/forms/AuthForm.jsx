@@ -78,7 +78,7 @@ function AuthForm({
 
       <button
         type="submit"
-        className="text-white bg-black rounded-[0.625rem] py-4 font-semibold transition hover:cursor-pointer hover:opacity-85 disabled:opacity-70 disabled:cursor-progress"
+        className="text-white bg-black rounded-xl py-4 font-semibold transition hover:cursor-pointer hover:opacity-85 disabled:opacity-70 disabled:cursor-progress"
         disabled={isSubmitting}
       >
         {submitText}

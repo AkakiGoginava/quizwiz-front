@@ -1,6 +1,6 @@
 import React from "react";
-import coverImg from "@/assets/images/register-cover.png";
 import { Link } from "react-router-dom";
+import { registerCover } from "@/assets";
 import { AuthLayout, AuthForm } from "@/components";
 import { useInputValidator, useAuth } from "@/hook";
 
@@ -69,7 +69,7 @@ function Register() {
   ];
 
   return (
-    <AuthLayout coverImg={coverImg}>
+    <AuthLayout coverImg={registerCover}>
       <div className="flex flex-col gap-9.5">
         <AuthForm
           fields={registerFields}

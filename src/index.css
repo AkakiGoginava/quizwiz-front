@@ -8,6 +8,10 @@
   --color-orange: #ff5613;
   --color-blue: #4b69fd;
 
+  --text-large: 5rem;
+
+  --radius-xl: 0.625rem;
+
   --font-raleway: "Raleway", system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
 

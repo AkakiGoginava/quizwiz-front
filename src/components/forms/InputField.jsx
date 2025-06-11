@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import AlertIcon from "@/assets/svg/alert-icon.svg?react";
-import EyeIcon from "@/assets/svg/eye-icon.svg?react";
-import CrossedEyeIcon from "@/assets/svg/crossed-eye-icon.svg?react";
+import { AlertIcon, EyeIcon, CrossedEyeIcon } from "@/assets";
 import { InputErrorMessage } from "@/components";
 import { cn } from "@/helper";
 
@@ -30,7 +28,7 @@ function InputField({
       <div className="relative">
         <input
           className={cn(
-            "w-full px-4 py-3.5 border border-light-gray rounded-[0.625rem] focus:outline-none focus:ring-3 focus:ring-blue-300",
+            "w-full px-4 py-3.5 border border-light-gray rounded-xl focus:outline-none focus:ring-3 focus:ring-blue-300",
             {
               "border-red-500 focus:ring-red-300": error,
             }

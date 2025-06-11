@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import coverImg from "@/assets/images/login-cover.png";
+import { loginCover } from "@/assets";
 import { AuthLayout, AuthForm } from "@/components";
 import { useAuth } from "@/hook";
 
@@ -38,7 +38,7 @@ function Login() {
   ];
 
   return (
-    <AuthLayout coverImg={coverImg}>
+    <AuthLayout coverImg={loginCover}>
       <div className="flex flex-col gap-9.5">
         <AuthForm
           fields={loginFields}

@@ -1,4 +1,4 @@
-export { default as Header } from "./Header.jsx";
-export { default as Footer } from "./Footer.jsx";
-export { default as Layout } from "./Layout.jsx";
-export { default as AuthLayout } from "./AuthLayout.jsx";
+export { default as Header } from "./Header";
+export { default as Footer } from "./Footer";
+export { default as Layout } from "./Layout";
+export { default as AuthLayout } from "./AuthLayout";
