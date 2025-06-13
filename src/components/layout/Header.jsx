@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { logo } from "@/assets";
+import { logo, Dot } from "@/assets";
 import { useAuth } from "@/hook";
+import { useLocation } from "react-router-dom";
+import { ProfileModal } from "./";
 
 function Header() {
-  const { isAuthenticated, logout } = useAuth();
+  const { isAuthenticated, logout, user } = useAuth();
+
+  const [isModalOpen, setModalOpen] = useState(false);
+
+  const location = useLocation();
 
   return (
     <header className="flex justify-between items-center border-b border-gray-300 px-23 w-full h-18 sticky top-0 bg-white z-50">
@@ -12,15 +18,40 @@ function Header() {
         <Link to="/">
           <img className="h-4 w-19" src={logo} alt="logo" />
         </Link>
-        <Link to="/quizzes">Quizzes</Link>
+        <div className="flex gap-2 items-center">
+          {location.pathname === "/quizzes" && <Dot />}
+          <Link to="/quizzes">Quizzes</Link>
+        </div>
       </div>
-      <div className="flex gap-1">
+      <div className="flex gap-1 text-sm">
         {isAuthenticated ? (
-          <button onClick={logout}>Log out</button>
+          <div className="relative">
+            <img
+              onClick={() => setModalOpen(true)}
+              className="size-8 rounded-full hover:cursor-pointer"
+              src={user.image}
+            />
+            <ProfileModal
+              isOpen={isModalOpen}
+              onClose={() => setModalOpen(false)}
+              user={user}
+              logout={logout}
+            />
+          </div>
         ) : (
           <>
-            <Link to="/register">Sign up</Link>
-            <Link to="/login">Log in</Link>{" "}
+            <Link
+              to="/register"
+              className="font-bold py-2.5 px-5.5 text-white bg-black transition rounded hover:opacity-80"
+            >
+              Sign up
+            </Link>
+            <Link
+              to="/login"
+              className="font-bold py-2.5 px-5.5 text-blue transition hover:opacity-80"
+            >
+              Log in
+            </Link>{" "}
           </>
         )}
       </div>

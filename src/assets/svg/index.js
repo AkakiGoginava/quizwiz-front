@@ -8,3 +8,5 @@ export { default as ArrowDownIcon } from "./arrow-down-icon.svg?react";
 export { default as DarkArrowIcon } from "./dark-arrow-icon.svg?react";
 export { default as FilterIcon } from "./filter-icon.svg?react";
 export { default as SpinningWheelIcon } from "./spinning-wheel-icon.svg?react";
+export { default as Dot } from "./dot.svg?react";
+export { default as LogoutIcon } from "./logout-icon.svg?react";
