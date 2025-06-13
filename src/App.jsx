@@ -8,6 +8,7 @@ import {
   Login,
   Register,
   ResetPassword,
+  Listing,
 } from "@/pages";
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
     <Layout>
       <Routes>
         <Route path="/" element={<Landing />} />
+        <Route path="/quizzes" element={<Listing />} />
 
         <Route element={<GuestRoute />}>
           <Route path="/register" element={<Register />} />
