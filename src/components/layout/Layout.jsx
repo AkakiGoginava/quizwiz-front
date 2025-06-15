@@ -18,7 +18,9 @@ function Layout({ children }) {
   return (
     <div className="min-h-screen flex flex-col">
       {!hideLayout && <Header />}
-      <main className="flex flex-1 relative items-center">{children}</main>
+      <main className="flex flex-1 h-full relative items-stretch">
+        {children}
+      </main>
       {!hideLayout && <Footer />}
     </div>
   );

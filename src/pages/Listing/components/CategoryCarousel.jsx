@@ -1,72 +1,45 @@
-import React from "react";
+import React, { useRef } from "react";
 import PropTypes from "prop-types";
-import { useRef, useState } from "react";
-import { CategoryBtn } from ".";
-import { DarkArrowIcon } from "@/assets";
-import { cn } from "@/helper";
+import { CategoryBtn, Carousel } from ".";
 
-function CategoryCarousel({ categories }) {
+function CategoryCarousel({ categories, categoryFilter, setFilterState }) {
   const containerRef = useRef(null);
-  const [atStart, setAtStart] = useState(true);
-  const [atEnd, setAtEnd] = useState(false);
 
-  const handleScroll = (e) => {
-    const container = containerRef.current;
-    const scrollArrow = e.target;
-    const direction = scrollArrow.dataset.direction;
-
-    if (container) {
-      container.scrollBy({
-        left:
-          direction === "right"
-            ? container.offsetWidth
-            : -container.offsetWidth,
-        behavior: "smooth",
-      });
-    }
-
-    setTimeout(() => {
-      setAtStart(container.scrollLeft <= 1);
-      setAtEnd(
-        container.scrollLeft + container.offsetWidth >=
-          container.scrollWidth - 1
-      );
-    }, 550);
+  const handleCategoryClick = (categoryId) => {
+    setFilterState((prev) => ({
+      ...prev,
+      categoryFilter: prev.categoryFilter.includes(categoryId)
+        ? prev.categoryFilter.filter((id) => id !== categoryId)
+        : [...prev.categoryFilter, categoryId],
+    }));
   };
 
   return (
-    <div className="flex gap-3 w-full overflow-hidden">
-      <div className="mt-2.5 size-5">
-        <DarkArrowIcon
-          onClick={handleScroll}
-          data-direction="left"
-          className={cn(
-            "transform -scale-x-100 transition hover:opacity-50 hover:cursor-pointer",
-            {
-              "opacity-0 pointer-events-none": atStart,
-            }
-          )}
-        />
-      </div>
-
+    <Carousel containerRef={containerRef}>
       <div ref={containerRef} className="flex gap-4 overflow-hidden">
-        <CategoryBtn isActive={true}>All Quizzes</CategoryBtn>
+        <CategoryBtn
+          isActive={categoryFilter.length === 0}
+          onClick={() =>
+            setFilterState((prev) => ({
+              ...prev,
+              categoryFilter: [],
+            }))
+          }
+        >
+          All Quizzes
+        </CategoryBtn>
 
         {categories?.map((category) => (
-          <CategoryBtn key={category.id}>{category.name}</CategoryBtn>
+          <CategoryBtn
+            onClick={() => handleCategoryClick(String(category.id))}
+            isActive={categoryFilter.includes(String(category.id))}
+            key={category.id}
+          >
+            {category.name}
+          </CategoryBtn>
         ))}
       </div>
-
-      <div className="mt-2.5 size-5">
-        <DarkArrowIcon
-          onClick={handleScroll}
-          data-direction="right"
-          className={cn(" transition hover:opacity-50 hover:cursor-pointer", {
-            "opacity-0 pointer-events-none": atEnd,
-          })}
-        />
-      </div>
-    </div>
+    </Carousel>
   );
 }
 
@@ -77,6 +50,10 @@ CategoryCarousel.propTypes = {
       name: PropTypes.string.isRequired,
     })
   ),
+  categoryFilter: PropTypes.arrayOf(
+    PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+  ).isRequired,
+  setFilterState: PropTypes.func.isRequired,
 };
 
 export default CategoryCarousel;

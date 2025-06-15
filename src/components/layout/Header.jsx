@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { logo, Dot } from "@/assets";
 import { useAuth } from "@/hook";
 import { useLocation } from "react-router-dom";
-import { ProfileModal } from "./";
+import { ProfileModal, SearchBar } from "./";
 
 function Header() {
   const { logout, user, isLoading } = useAuth();
@@ -20,12 +20,17 @@ function Header() {
         <Link to="/">
           <img className="h-4 w-19" src={logo} alt="logo" />
         </Link>
+
         <div className="flex gap-2 items-center">
           {location.pathname === "/quizzes" && <Dot />}
           <Link to="/quizzes">Quizzes</Link>
         </div>
       </div>
-      <div className="flex gap-1 text-sm">
+
+      <div className="flex gap-7 text-sm">
+        {(location.pathname === "/quizzes" ||
+          location.pathname === "/quiz") && <SearchBar />}
+
         {user ? (
           <div className="relative">
             <img
@@ -33,6 +38,7 @@ function Header() {
               className="size-8 rounded-full hover:cursor-pointer"
               src={user.image}
             />
+
             <ProfileModal
               isOpen={isModalOpen}
               onClose={() => setModalOpen(false)}
@@ -41,7 +47,7 @@ function Header() {
             />
           </div>
         ) : (
-          <>
+          <div className="flex gap-1">
             <Link
               to="/register"
               className="font-bold py-2.5 px-5.5 text-white bg-black transition rounded hover:opacity-80"
@@ -54,7 +60,7 @@ function Header() {
             >
               Log in
             </Link>{" "}
-          </>
+          </div>
         )}
       </div>
     </header>

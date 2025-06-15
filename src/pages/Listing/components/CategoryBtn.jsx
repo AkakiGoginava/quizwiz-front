@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { cn } from "@/helper";
 
-function CategoryBtn({ isActive, children }) {
+function CategoryBtn({ isActive, children, onClick }) {
   return (
     <button
       type="button"
@@ -12,6 +12,7 @@ function CategoryBtn({ isActive, children }) {
           "border-b-2 text-black": isActive,
         }
       )}
+      onClick={onClick}
     >
       {children}
     </button>
@@ -21,6 +22,7 @@ function CategoryBtn({ isActive, children }) {
 CategoryBtn.propTypes = {
   isActive: PropTypes.bool.isRequired,
   children: PropTypes.node.isRequired,
+  onClick: PropTypes.func.isRequired,
 };
 
 export default CategoryBtn;

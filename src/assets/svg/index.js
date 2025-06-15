@@ -10,3 +10,5 @@ export { default as FilterIcon } from "./filter-icon.svg?react";
 export { default as SpinningWheelIcon } from "./spinning-wheel-icon.svg?react";
 export { default as Dot } from "./dot.svg?react";
 export { default as LogoutIcon } from "./logout-icon.svg?react";
+export { default as SearchIcon } from "./search-icon.svg?react";
+export { default as CrossIcon } from "./cross-icon.svg?react";
