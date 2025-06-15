@@ -6,11 +6,13 @@ import { useLocation } from "react-router-dom";
 import { ProfileModal } from "./";
 
 function Header() {
-  const { isAuthenticated, logout, user } = useAuth();
+  const { logout, user, isLoading } = useAuth();
 
   const [isModalOpen, setModalOpen] = useState(false);
 
   const location = useLocation();
+
+  if (isLoading) return <></>;
 
   return (
     <header className="flex justify-between items-center border-b border-gray-300 px-23 w-full h-18 sticky top-0 bg-white z-50">
@@ -24,7 +26,7 @@ function Header() {
         </div>
       </div>
       <div className="flex gap-1 text-sm">
-        {isAuthenticated ? (
+        {user ? (
           <div className="relative">
             <img
               onClick={() => setModalOpen(true)}

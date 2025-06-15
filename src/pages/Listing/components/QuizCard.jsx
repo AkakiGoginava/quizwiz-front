@@ -21,7 +21,7 @@ function QuizCard({
             {categories?.map((category, i) => (
               <React.Fragment key={i}>
                 <span className="font-semibold text-blue text-sm">
-                  {category}
+                  {category.name}
                 </span>
                 {i < categories.length - 1 && (
                   <span className="mx-1.5 text-gray-300 text-sm">•</span>
@@ -100,15 +100,16 @@ QuizCard.propTypes = {
   totalUsers: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
     .isRequired,
   difficulty: PropTypes.shape({
+    id: PropTypes.string.isRequired,
     icon: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
   }).isRequired,
   categories: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+      id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
     })
-  ).isRequired,
+  ),
   image: PropTypes.string.isRequired,
 };
 

@@ -19,7 +19,11 @@ export function AuthProvider({ children }) {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
 
-  const { data: user, isLoading } = useQuery({
+  const {
+    data: user,
+    isLoading,
+    error,
+  } = useQuery({
     queryKey: ["user"],
     queryFn: fetchUser,
     retry: false,
@@ -89,16 +93,19 @@ export function AuthProvider({ children }) {
     },
   });
 
+  const isAuthenticated =
+    !isLoading && (!error || error?.response?.status != 401);
+
   return (
     <AuthContext.Provider
       value={{
-        user: user && user["data"],
+        user: user?.data,
         register: handleRegister,
         login: handleLogin,
         logout: handleLogout,
         forgotPassword: handleForgotPassword,
         resetPassword: handleResetPassword,
-        isAuthenticated: !!user,
+        isAuthenticated,
         isLoading,
       }}
     >

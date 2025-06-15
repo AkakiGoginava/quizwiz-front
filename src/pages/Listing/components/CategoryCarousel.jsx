@@ -1,11 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useRef, useState } from "react";
-import { CategoryBtn } from "./";
+import { CategoryBtn } from ".";
 import { DarkArrowIcon } from "@/assets";
 import { cn } from "@/helper";
 
-function Carousel({ categories }) {
+function CategoryCarousel({ categories }) {
   const containerRef = useRef(null);
   const [atStart, setAtStart] = useState(true);
   const [atEnd, setAtEnd] = useState(false);
@@ -48,6 +48,7 @@ function Carousel({ categories }) {
           )}
         />
       </div>
+
       <div ref={containerRef} className="flex gap-4 overflow-hidden">
         <CategoryBtn isActive={true}>All Quizzes</CategoryBtn>
 
@@ -68,7 +69,8 @@ function Carousel({ categories }) {
     </div>
   );
 }
-Carousel.propTypes = {
+
+CategoryCarousel.propTypes = {
   categories: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
@@ -77,4 +79,4 @@ Carousel.propTypes = {
   ),
 };
 
-export default Carousel;
+export default CategoryCarousel;

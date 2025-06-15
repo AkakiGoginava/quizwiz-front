@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { LogoutIcon } from "@/assets";
 
 function ProfileModal({ isOpen, onClose, user, logout }) {
@@ -44,5 +45,16 @@ function ProfileModal({ isOpen, onClose, user, logout }) {
     </div>
   );
 }
+
+ProfileModal.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
+  user: PropTypes.shape({
+    image: PropTypes.string,
+    name: PropTypes.string,
+    email: PropTypes.string,
+  }).isRequired,
+  logout: PropTypes.func.isRequired,
+};
 
 export default ProfileModal;

@@ -7,7 +7,6 @@ function useQuizzes() {
     queryFn: fetchQuizzes,
     initialPageParam: 0,
     getNextPageParam: (lastPage) => lastPage["next_cursor"],
-    staleTime: 5 * 60 * 1000,
   });
 }
 
