@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
+import { FilterIcon } from "@/assets";
 import { useSearchParams } from "react-router-dom";
 import { useCategories, useDifficulties } from "@/hook";
-import { FilterIcon } from "@/assets";
-import { CategoryCarousel } from ".";
+import { CategoryCarousel, FilterModal } from ".";
 
 function FilterTab({ filterState, setFilterState }) {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -34,9 +34,10 @@ function FilterTab({ filterState, setFilterState }) {
     setSearchParams(searchParams, { replace: true });
   }, [filterState]);
 
-  const { data: categories, isLoadingCategories } = useCategories();
+  const { data: categories, isLoading: isLoadingCategories } = useCategories();
 
-  const { isLoading: isLoadingDifficulties } = useDifficulties();
+  const { data: difficulties, isLoading: isLoadingDifficulties } =
+    useDifficulties();
 
   if (isLoadingCategories || isLoadingDifficulties)
     return <div className="w-full text-center">...</div>;
@@ -49,13 +50,23 @@ function FilterTab({ filterState, setFilterState }) {
         setFilterState={setFilterState}
       />
 
-      <button
-        type="button"
-        className="flex gap-1.5 items-center mb-4 py-2 px-4 border border-gray-400 rounded-xl text-gray-500 font-light text-sm"
-      >
-        <FilterIcon className="size-3.5" />
-        <span>Filter</span>
-      </button>
+      <div className="relative">
+        <button
+          type="button"
+          className="flex gap-1.5 items-center mb-4 py-2 px-4 border border-gray-400 rounded-xl text-gray-500 font-light text-sm"
+        >
+          <FilterIcon className="size-3.5" />
+          <span>Filter</span>
+        </button>
+
+        <FilterModal
+          isOpen={true}
+          categories={categories}
+          difficulties={difficulties}
+          filterState={filterState}
+          setFilterState={setFilterState}
+        />
+      </div>
     </div>
   );
 }
