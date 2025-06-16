@@ -29,7 +29,9 @@ function ToggleRadioGroup({ type, options, value, onChange }) {
             <input
               type="checkbox"
               checked={value === option.value}
-              onChange={() => onChange(option.value)}
+              onChange={() =>
+                value === option.value ? onChange("") : onChange(option.value)
+              }
               className={cn(
                 "ring-0 rounded checked:bg-black border-gray-300 hover:cursor-pointer",
                 {

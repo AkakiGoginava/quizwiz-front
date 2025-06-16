@@ -5,11 +5,11 @@ import { FilterTab, QuizCard } from "./components";
 
 function Listing() {
   const [filterState, setFilterState] = useState({
-    categoryFilter: [],
     titleSearch: "",
-    difficultyFilter: [],
-    completedFilter: "",
     sortType: "",
+    completedFilter: "",
+    categoryFilter: [],
+    difficultyFilter: [],
   });
 
   const {

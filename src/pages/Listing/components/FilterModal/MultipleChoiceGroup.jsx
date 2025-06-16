@@ -1,38 +1,24 @@
-import React, { useRef } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 
 function MultipleChoiceGroup({
   choices,
   selectedChoices = [],
   setSelectedChoices,
-  name,
 }) {
-  const inputRefs = useRef([]);
-
   const handleClick = function (choiceId) {
-    setSelectedChoices((prev) => {
-      const idStr = String(choiceId);
+    const idStr = String(choiceId);
 
-      return prev.includes(idStr)
-        ? prev.filter((id) => id !== idStr)
-        : [...prev, idStr];
-    });
+    const newChoices = selectedChoices.includes(idStr)
+      ? selectedChoices.filter((id) => id !== idStr)
+      : [...selectedChoices, idStr];
+    setSelectedChoices(newChoices);
   };
 
   return (
     <div className="flex flex-wrap gap-2">
-      {choices.map((choice, index) => (
+      {choices.map((choice) => (
         <div key={choice.id}>
-          <input
-            ref={(el) => (inputRefs.current[index] = el)}
-            type="checkbox"
-            name={name}
-            value={choice.id}
-            checked={selectedChoices.includes(String(choice.id))}
-            className="hidden"
-            readOnly
-          />
-
           <div
             onClick={() => handleClick(choice.id)}
             style={

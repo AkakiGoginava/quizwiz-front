@@ -2,16 +2,28 @@ import { axiosInstance } from ".";
 
 async function fetchQuizzes({
   pageParam = 0,
-  categoryFilter = [],
+  sortType = "",
   titleSearch = "",
+  completedFilter = "",
+  categoryFilter = [],
+  difficultyFilter = [],
 }) {
   const params = {
     cursor: pageParam,
-    ...(categoryFilter.length > 0 && {
-      "filter[categories.id]": categoryFilter.join(","),
+    ...(sortType && {
+      sort: sortType,
     }),
     ...(titleSearch && {
       "filter[title]": titleSearch,
+    }),
+    ...(completedFilter && {
+      "filter[completed]": completedFilter,
+    }),
+    ...(categoryFilter.length > 0 && {
+      "filter[categories.id]": categoryFilter.join(","),
+    }),
+    ...(difficultyFilter.length > 0 && {
+      "filter[difficulty_id]": difficultyFilter.join(","),
     }),
   };
 

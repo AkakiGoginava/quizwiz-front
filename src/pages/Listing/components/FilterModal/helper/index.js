@@ -1,1 +1,1 @@
-export { default as handleRadio } from "./handleRadio";
+export { default as onSubmit } from "./onSubmit";
