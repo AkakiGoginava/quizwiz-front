@@ -17,7 +17,7 @@ function ProfileModal({ isOpen, onClose, user, logout }) {
       onClick={handleBackdropClick}
     >
       <div
-        className="absolute top-5 right-23 z-50 flex gap-2 px-6 py-8 border border-gray-300 rounded-xl bg-white"
+        className="absolute top-4 right-23 z-50 flex gap-2 px-6 py-8 border border-gray-300 rounded-xl bg-white"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex flex-col gap-3 w-57">

@@ -12,3 +12,7 @@ export { default as Dot } from "./dot.svg?react";
 export { default as LogoutIcon } from "./logout-icon.svg?react";
 export { default as SearchIcon } from "./search-icon.svg?react";
 export { default as CrossIcon } from "./cross-icon.svg?react";
+export { default as ArrowLongIcon } from "./arrow-long-icon.svg?react";
+export { default as ArrowDiagonalIcon } from "./arrow-diagonal-icon.svg?react";
+export { default as DiamondIcon } from "./diamond-icon.svg?react";
+export { default as CheckmarkIcon } from "./checkmark-icon.svg?react";

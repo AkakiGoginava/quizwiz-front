@@ -4,11 +4,12 @@ import { useQuizzes } from "@/hook";
 import { FilterTab, QuizCard } from "./components";
 
 function Listing() {
-  const [categoryFilter, setCategoryFilter] = useState([]);
-
   const [filterState, setFilterState] = useState({
     categoryFilter: [],
     titleSearch: "",
+    difficultyFilter: [],
+    completedFilter: "",
+    sortType: "",
   });
 
   const {
@@ -21,12 +22,7 @@ function Listing() {
 
   return (
     <div className="px-23 size-full mb-17.5">
-      <FilterTab
-        categoryFilter={categoryFilter}
-        setCategoryFilter={setCategoryFilter}
-        filterState={filterState}
-        setFilterState={setFilterState}
-      />
+      <FilterTab filterState={filterState} setFilterState={setFilterState} />
 
       <div className="relative grid grid-cols-[repeat(auto-fit,minmax(25rem,1fr))] gap-y-8 mt-10">
         {quizzes?.pages.map((page) =>
