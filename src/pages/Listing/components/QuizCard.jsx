@@ -15,6 +15,7 @@ function QuizCard({
   return (
     <div className="flex flex-col w-98.5 gap-8 px-6 pt-6 pb-8 rounded shadow-lg">
       <img src={image} className="h-60 w-86" alt="quiz image" />
+
       <div className="flex flex-col gap-5">
         <div className="flex flex-col gap-3">
           <div className="w-full overflow-ellipsis">
@@ -23,6 +24,7 @@ function QuizCard({
                 <span className="font-semibold text-blue text-sm">
                   {category.name}
                 </span>
+
                 {i < categories.length - 1 && (
                   <span className="mx-1.5 text-gray-300 text-sm">•</span>
                 )}

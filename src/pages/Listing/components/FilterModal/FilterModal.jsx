@@ -17,11 +17,8 @@ function FilterModal({ isOpen, setIsOpen, categories, filterState }) {
   const { control, handleSubmit, reset } = useForm({
     defaultValues: { ...filterState },
   });
-
   const { user } = useAuth();
-
   const navigate = useNavigate();
-
   const { data: difficulties, isLoading: isLoadingDifficulties } =
     useDifficulties();
 
@@ -30,7 +27,6 @@ function FilterModal({ isOpen, setIsOpen, categories, filterState }) {
   }, [filterState, reset]);
 
   if (!isOpen) return null;
-
   if (isLoadingDifficulties) return <div>...</div>;
 
   const handleReset = () => {

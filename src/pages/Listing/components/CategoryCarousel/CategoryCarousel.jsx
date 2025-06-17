@@ -31,9 +31,9 @@ function CategoryCarousel({ categories, categoryFilter, setFilterState }) {
 
         {categories?.map((category) => (
           <CategoryBtn
+            key={category.id}
             onClick={() => handleCategoryClick(String(category.id))}
             isActive={categoryFilter.includes(String(category.id))}
-            key={category.id}
           >
             {category.name}
           </CategoryBtn>

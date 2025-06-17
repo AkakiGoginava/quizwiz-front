@@ -40,7 +40,6 @@ function FilterTab({ filterState, setFilterState }) {
           setIsOpen={setIsModalOpen}
           categories={categories}
           filterState={filterState}
-          setFilterState={setFilterState}
         />
       </div>
     </div>

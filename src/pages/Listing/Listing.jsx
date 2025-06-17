@@ -24,7 +24,7 @@ function Listing() {
     <div className="px-23 size-full mb-17.5">
       <FilterTab filterState={filterState} setFilterState={setFilterState} />
 
-      <div className="relative grid grid-cols-[repeat(auto-fit,minmax(25rem,1fr))] gap-y-8 mt-10">
+      <section className="relative grid grid-cols-[repeat(auto-fit,minmax(25rem,1fr))] gap-y-8 mt-10">
         {quizzes?.pages.map((page) =>
           page.data.map((quiz) => (
             <QuizCard
@@ -41,7 +41,7 @@ function Listing() {
         {isLoadingQuizzes && (
           <div className="absolute inset-0 flex items-center justify-center bg-white/70"></div>
         )}
-      </div>
+      </section>
 
       <div className="flex justify-center mt-10">
         {hasNextPage && (

@@ -8,35 +8,25 @@ const useUpdateUrlQuery = function (
   useEffect(() => {
     const params = new URLSearchParams(searchParams);
 
-    if (filterState.titleSearch) {
-      params.set("title", filterState.titleSearch);
-    } else {
-      params.delete("title");
-    }
+    const mapping = {
+      title: filterState.titleSearch,
+      sort: filterState.sortType,
+      completed: filterState.completedFilter,
+      categories: filterState.categoryFilter.length
+        ? filterState.categoryFilter.join(",")
+        : "",
+      difficulties: filterState.difficultyFilter.length
+        ? filterState.difficultyFilter.join(",")
+        : "",
+    };
 
-    if (filterState.sortType) {
-      params.set("sort", filterState.sortType);
-    } else {
-      params.delete("sort");
-    }
-
-    if (filterState.completedFilter) {
-      params.set("completed", filterState.completedFilter);
-    } else {
-      params.delete("completed");
-    }
-
-    if (filterState.categoryFilter.length > 0) {
-      params.set("categories", filterState.categoryFilter.join(","));
-    } else {
-      params.delete("categories");
-    }
-
-    if (filterState.difficultyFilter.length > 0) {
-      params.set("difficulties", filterState.difficultyFilter.join(","));
-    } else {
-      params.delete("difficulties");
-    }
+    Object.entries(mapping).forEach(([key, value]) => {
+      if (value) {
+        params.set(key, value);
+      } else {
+        params.delete(key);
+      }
+    });
 
     if (params.toString() === searchParams.toString()) return;
 
