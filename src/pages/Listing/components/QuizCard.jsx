@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { CompletedIcon, NotCompletedIcon } from "@/assets";
+
+import { CompletedIcon, NotCompletedIcon } from "@/components";
 
 function QuizCard({
   completeDate = null,

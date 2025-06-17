@@ -1,8 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
+
 import clsx from "clsx";
-import { CheckmarkIcon } from "@/assets";
+
 import { cn } from "@/helper";
+import { CheckmarkIcon } from "@/components";
 
 function ToggleRadioGroup({ type, options, value, onChange }) {
   const isSortType = type === "sort";

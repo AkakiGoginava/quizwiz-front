@@ -1,20 +1,18 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { LogoutIcon } from "@/assets";
+
+import { LogoutIcon } from "@/components";
+import { handleBackdropClick } from "@/components/layout/helpers";
 
 function ProfileModal({ isOpen, onClose, user, logout }) {
   if (!isOpen) return null;
 
-  const handleBackdropClick = (e) => {
-    if (e.target === e.currentTarget) {
-      onClose();
-    }
-  };
-
   return (
     <div
       className="fixed inset-0 z-40 flex items-start justify-end"
-      onClick={handleBackdropClick}
+      onClick={(e) => {
+        handleBackdropClick(e, onClose);
+      }}
     >
       <div
         className="absolute top-4 right-23 z-50 flex gap-2 px-6 py-8 border border-gray-300 rounded-xl bg-white"

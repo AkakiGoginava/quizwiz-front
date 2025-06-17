@@ -1,4 +1,4 @@
-import { axiosInstance } from "./";
+import { axiosInstance } from "@/services";
 import { getCsrfCookie } from "@/helper";
 
 async function forgotPassword(formData) {

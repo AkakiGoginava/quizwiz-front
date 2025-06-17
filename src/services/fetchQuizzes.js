@@ -1,4 +1,4 @@
-import { axiosInstance } from ".";
+import { axiosInstance } from "@/services";
 
 async function fetchQuizzes({
   pageParam = 0,

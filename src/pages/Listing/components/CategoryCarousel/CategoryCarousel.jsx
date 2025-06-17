@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import PropTypes from "prop-types";
-import { CategoryBtn, Carousel } from ".";
+
+import { CategoryButton, Carousel } from "@/pages/Listing";
 
 function CategoryCarousel({ categories, categoryFilter, setFilterState }) {
   const containerRef = useRef(null);
@@ -17,7 +18,7 @@ function CategoryCarousel({ categories, categoryFilter, setFilterState }) {
   return (
     <Carousel containerRef={containerRef}>
       <div ref={containerRef} className="flex gap-4 overflow-hidden">
-        <CategoryBtn
+        <CategoryButton
           isActive={categoryFilter.length === 0}
           onClick={() =>
             setFilterState((prev) => ({
@@ -27,16 +28,16 @@ function CategoryCarousel({ categories, categoryFilter, setFilterState }) {
           }
         >
           All Quizzes
-        </CategoryBtn>
+        </CategoryButton>
 
         {categories?.map((category) => (
-          <CategoryBtn
+          <CategoryButton
             key={category.id}
             onClick={() => handleCategoryClick(String(category.id))}
             isActive={categoryFilter.includes(String(category.id))}
           >
             {category.name}
-          </CategoryBtn>
+          </CategoryButton>
         ))}
       </div>
     </Carousel>

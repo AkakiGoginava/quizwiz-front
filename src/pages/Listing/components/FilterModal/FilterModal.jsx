@@ -1,5 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import PropTypes from "prop-types";
+
+import { Controller } from "react-hook-form";
+
 import {
   CrossIcon,
   FilterIcon,
@@ -7,37 +10,27 @@ import {
   ArrowDiagonalIcon,
   ArrowLongIcon,
   DiamondIcon,
-} from "@/assets";
-import { ToggleRadioGroup, MultipleChoiceGroup, onSubmit } from ".";
-import { Controller, useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
-import { useAuth, useDifficulties } from "@/hook";
+} from "@/components";
+import {
+  ToggleRadioGroup,
+  MultipleChoiceGroup,
+  useFilterModal,
+} from "@/pages/Listing";
+import { onSubmit } from "@/pages/Listing/components/FilterModal/helpers";
 
 function FilterModal({ isOpen, setIsOpen, categories, filterState }) {
-  const { control, handleSubmit, reset } = useForm({
-    defaultValues: { ...filterState },
-  });
-  const { user } = useAuth();
-  const navigate = useNavigate();
-  const { data: difficulties, isLoading: isLoadingDifficulties } =
-    useDifficulties();
-
-  useEffect(() => {
-    reset({ ...filterState });
-  }, [filterState, reset]);
+  const {
+    control,
+    handleSubmit,
+    user,
+    navigate,
+    difficulties,
+    isLoadingDifficulties,
+    handleReset,
+  } = useFilterModal(filterState);
 
   if (!isOpen) return null;
   if (isLoadingDifficulties) return <div>...</div>;
-
-  const handleReset = () => {
-    reset({
-      titleSearch: "",
-      sortType: "",
-      completedFilter: "",
-      difficultyFilter: [],
-      categoryFilter: [],
-    });
-  };
 
   const completedFilterOptions = [
     { label: "My quizzes", value: "completed" },

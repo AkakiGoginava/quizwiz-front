@@ -1,4 +1,4 @@
-import { axiosInstance } from ".";
+import { axiosInstance } from "@/services";
 
 async function fetchCategories() {
   const response = await axiosInstance.get("/api/categories");

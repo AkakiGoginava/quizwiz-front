@@ -1,24 +1,18 @@
-import React, { useState } from "react";
-import { ArrowDownIcon, SpinningWheelIcon } from "@/assets";
-import { useQuizzes } from "@/hook";
-import { FilterTab, QuizCard } from "./components";
+import React from "react";
+
+import { ArrowShortIcon, SpinningWheelIcon } from "@/components";
+import { FilterTab, QuizCard, useListing } from "@/pages/Listing";
 
 function Listing() {
-  const [filterState, setFilterState] = useState({
-    titleSearch: "",
-    sortType: "",
-    completedFilter: "",
-    categoryFilter: [],
-    difficultyFilter: [],
-  });
-
   const {
-    data: quizzes,
+    filterState,
+    setFilterState,
+    quizzes,
     fetchNextPage,
     hasNextPage,
-    isFetching: isFetchingNextPage,
-    isLoading: isLoadingQuizzes,
-  } = useQuizzes(filterState);
+    isFetchingNextPage,
+    isLoadingQuizzes,
+  } = useListing();
 
   return (
     <div className="px-23 size-full mb-17.5">
@@ -57,7 +51,7 @@ function Listing() {
               </>
             ) : (
               <>
-                <ArrowDownIcon className="size-5" />
+                <ArrowShortIcon className="size-5" />
                 <p>Load more</p>
               </>
             )}
