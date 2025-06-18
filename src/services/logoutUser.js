@@ -1,4 +1,4 @@
-import { axiosInstance } from "./";
+import { axiosInstance } from "@/services";
 
 async function logoutUser() {
   const response = await axiosInstance.post("/api/logout");

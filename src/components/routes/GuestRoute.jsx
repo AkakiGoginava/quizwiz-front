@@ -1,11 +1,13 @@
 import React from "react";
+
 import { Navigate, Outlet } from "react-router-dom";
+
 import { useAuth } from "@/hook";
 
 function GuestRoute() {
-  const { isAuthenticated } = useAuth();
+  const { user } = useAuth();
 
-  if (isAuthenticated) {
+  if (user) {
     return <Navigate to="/" />;
   }
 

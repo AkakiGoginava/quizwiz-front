@@ -1,17 +1,19 @@
 import React from "react";
-import logo from "@/assets/images/logo.png";
+
 import { Link } from "react-router-dom";
+
+import logo from "@/assets/images/logo.png";
 
 function Footer() {
   return (
-    <footer className="relative flex gap-25 text-gray-600 text-sm px-24 pt-11 pb-20">
+    <footer className="relative flex gap-25 text-gray-600 text-sm px-24 pt-11 pb-20 border-t border-gray-300">
       <div>
         <img className="w-23 h-5" src={logo} alt="logo" />
       </div>
 
       <div className="flex flex-col gap-6">
         <h6 className="font-bold text-black">Content</h6>
-        <Link>Quizzes</Link>
+        <Link to="/quizzes">Quizzes</Link>
       </div>
 
       <div className="flex flex-col gap-6">

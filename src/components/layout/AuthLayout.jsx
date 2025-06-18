@@ -1,7 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { logo, ArrowIcon } from "@/assets";
+
 import { Link, useNavigate } from "react-router-dom";
+
+import { logo } from "@/assets";
+import { ArrowIcon } from "@/components";
 
 function AuthLayout({ coverImg, children }) {
   const navigate = useNavigate();

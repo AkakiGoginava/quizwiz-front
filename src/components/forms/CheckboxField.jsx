@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+
 import { InputErrorMessage } from "@/components";
 
 function CheckboxField({ name, label, register, rules, error }) {

@@ -1,7 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Header, Footer } from "@/components";
+
 import { useLocation } from "react-router-dom";
+
+import { Header, Footer } from "@/components";
 
 function Layout({ children }) {
   const { pathname } = useLocation();
@@ -18,7 +20,7 @@ function Layout({ children }) {
   return (
     <div className="min-h-screen flex flex-col">
       {!hideLayout && <Header />}
-      <main className="flex flex-1 relative min-h-screen items-center">
+      <main className="flex flex-1 h-full relative items-stretch">
         {children}
       </main>
       {!hideLayout && <Footer />}

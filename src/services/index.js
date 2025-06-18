@@ -7,3 +7,6 @@ export { default as registerUser } from "./registerUser";
 export { default as verifyEmail } from "./verifyEmail";
 export { default as resetPassword } from "./resetPassword";
 export { default as forgotPassword } from "./forgotPassword";
+export { default as fetchQuizzes } from "./fetchQuizzes";
+export { default as fetchCategories } from "./fetchCategories";
+export { default as fetchDifficulties } from "./fetchDifficulties";

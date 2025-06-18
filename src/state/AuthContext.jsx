@@ -1,6 +1,9 @@
 import React, { createContext } from "react";
 import PropTypes from "prop-types";
+
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
+
 import {
   registerUser,
   loginUser,
@@ -11,7 +14,6 @@ import {
   resetPassword,
 } from "@/services";
 import { useAuthMutation } from "@/hook";
-import { useNavigate, useSearchParams } from "react-router-dom";
 
 export const AuthContext = createContext();
 export function AuthProvider({ children }) {
@@ -19,7 +21,11 @@ export function AuthProvider({ children }) {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
 
-  const { data: user, isLoading } = useQuery({
+  const {
+    data: user,
+    isLoading,
+    error,
+  } = useQuery({
     queryKey: ["user"],
     queryFn: fetchUser,
     retry: false,
@@ -89,16 +95,19 @@ export function AuthProvider({ children }) {
     },
   });
 
+  const isAuthenticated =
+    !isLoading && (!error || error?.response?.status != 401);
+
   return (
     <AuthContext.Provider
       value={{
-        user,
+        user: user?.data,
         register: handleRegister,
         login: handleLogin,
         logout: handleLogout,
         forgotPassword: handleForgotPassword,
         resetPassword: handleResetPassword,
-        isAuthenticated: !!user,
+        isAuthenticated,
         isLoading,
       }}
     >
