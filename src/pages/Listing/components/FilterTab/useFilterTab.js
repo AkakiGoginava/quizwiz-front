@@ -53,8 +53,6 @@ export const useFilterTab = (filterState, setFilterState) => {
       }
     });
 
-    if (params.toString() === searchParams.toString()) return;
-
     setSearchParams(params, { replace: true });
   }, [filterState]);
 

@@ -1,18 +1,22 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { CompletedIcon, NotCompletedIcon } from "@/components";
+import { CompletedIcon, NotCompletedIcon, PointsIcon } from "@/components";
+import formatTime from "@/helper";
 
 function QuizCard({
   completeDate = null,
   time = null,
   points = null,
+  totalPoints,
   title,
   totalUsers,
   difficulty,
   categories,
   image,
 }) {
+  const date = new Date(completeDate);
+
   return (
     <div className="flex flex-col w-98.5 gap-8 px-6 pt-6 pb-8 rounded shadow-lg">
       <img src={image} className="h-60 w-86" alt="quiz image" />
@@ -52,8 +56,16 @@ function QuizCard({
                   {completeDate ? "Completed" : "Not Completed"}
                 </p>
 
-                <p className={!completeDate && "text-light-gray"}>
-                  {completeDate ? completeDate : "Date,Time"}
+                <p
+                  className={completeDate ? "text-gray-600" : "text-light-gray"}
+                >
+                  {completeDate
+                    ? date.toLocaleDateString("en-US", {
+                        day: "2-digit",
+                        month: "short",
+                        year: "numeric",
+                      })
+                    : "Date,Time"}
                 </p>
               </div>
             </div>
@@ -61,14 +73,14 @@ function QuizCard({
             <div>
               <p className="font-semibold">Total time</p>
 
-              <p className={!completeDate && "text-light-gray"}>
-                {time ? time : "N/A"}
+              <p className={time ? "text-gray-600" : "text-light-gray"}>
+                {time ? formatTime(time) : "N/A"}
               </p>
             </div>
 
             <div>
-              <p className="font-semibold">Total users</p>
-              <p>{totalUsers}</p>
+              <p className="font-semibold ">Total users</p>
+              <p className="text-gray-600">{totalUsers}</p>
             </div>
           </div>
 
@@ -78,14 +90,23 @@ function QuizCard({
 
               <div>
                 <p className="font-semibold">Difficulty level</p>
-                <p>{difficulty.name}</p>
+                <p className="text-gray-600">{difficulty.name}</p>
               </div>
             </div>
 
             {completeDate && (
-              <div>
-                <p className="font-semibold">Points</p>
-                <p>{points}</p>
+              <div className="flex gap-3">
+                <PointsIcon className="w-10 h-10" />
+
+                <div>
+                  <p className="font-semibold">Points</p>
+
+                  <div className="text-gray-600">
+                    <span>{points}</span>
+                    <span>/</span>
+                    <span>{totalPoints}</span>
+                  </div>
+                </div>
               </div>
             )}
           </div>
@@ -99,6 +120,7 @@ QuizCard.propTypes = {
   completeDate: PropTypes.string,
   time: PropTypes.string,
   points: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  totalPoints: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   title: PropTypes.string.isRequired,
   totalUsers: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
     .isRequired,

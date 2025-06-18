@@ -2,8 +2,15 @@ import { useState } from "react";
 
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { fetchQuizzes } from "@/services";
+import { useAuth } from "@/hook";
 
 export const useListing = () => {
+  const { user } = useAuth();
+
+  const userQuizzes = user?.quizzes
+    ? Object.fromEntries(user.quizzes.map((quiz) => [quiz.quiz_id, quiz]))
+    : {};
+
   const [filterState, setFilterState] = useState({
     titleSearch: "",
     sortType: "",
@@ -22,7 +29,7 @@ export const useListing = () => {
     queryKey: ["quizzes", filterState],
     queryFn: ({ pageParam = 0 }) => fetchQuizzes({ pageParam, ...filterState }),
     initialPageParam: 0,
-    getNextPageParam: (lastPage) => lastPage["next_cursor"],
+    getNextPageParam: (lastPage) => lastPage.meta?.next_cursor,
   });
 
   return {
@@ -33,5 +40,6 @@ export const useListing = () => {
     hasNextPage,
     isFetchingNextPage,
     isLoadingQuizzes,
+    userQuizzes,
   };
 };
