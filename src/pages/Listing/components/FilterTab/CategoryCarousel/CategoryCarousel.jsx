@@ -1,7 +1,8 @@
 import React, { useRef } from "react";
 import PropTypes from "prop-types";
 
-import { CategoryButton, Carousel } from "@/pages/Listing";
+import { Carousel } from "./Carousel";
+import CategoryButton from "./CategoryButton";
 
 function CategoryCarousel({ categories, categoryFilter, setFilterState }) {
   const containerRef = useRef(null);

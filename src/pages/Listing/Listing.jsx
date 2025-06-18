@@ -1,7 +1,7 @@
 import React from "react";
 
 import { ArrowShortIcon, SpinningWheelIcon } from "@/components";
-import { FilterTab, QuizCard } from "@/pages/Listing";
+import { FilterTab, QuizCard } from "./components";
 import { useListing } from "./useListing";
 
 function Listing() {

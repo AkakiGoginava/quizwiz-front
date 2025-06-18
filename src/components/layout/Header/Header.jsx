@@ -26,8 +26,7 @@ function Header() {
       </div>
 
       <div className="flex gap-7 text-sm">
-        {(location.pathname === "/quizzes" ||
-          location.pathname === "/quiz") && <SearchBar />}
+        {location.pathname === "/quizzes" && <SearchBar />}
 
         {user ? (
           <div className="relative">

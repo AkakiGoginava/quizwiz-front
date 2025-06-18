@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import { cn } from "@/helper";
 
-function CategoryBtn({ isActive, children, onClick }) {
+function CategoryButton({ isActive, children, onClick }) {
   return (
     <button
       type="button"
@@ -20,10 +20,10 @@ function CategoryBtn({ isActive, children, onClick }) {
   );
 }
 
-CategoryBtn.propTypes = {
+CategoryButton.propTypes = {
   isActive: PropTypes.bool.isRequired,
   children: PropTypes.node.isRequired,
   onClick: PropTypes.func.isRequired,
 };
 
-export default CategoryBtn;
+export default CategoryButton;

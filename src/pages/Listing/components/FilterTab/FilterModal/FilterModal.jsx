@@ -11,7 +11,8 @@ import {
   ArrowLongIcon,
   DiamondIcon,
 } from "@/components";
-import { ToggleRadioGroup, MultipleChoiceGroup } from "@/pages/Listing";
+import ToggleRadioGroup from "./ToggleRadioGroup";
+import MultipleChoiceGroup from "./MultipleChoiceGroup";
 import { onSubmit } from "./helpers";
 import { useFilterModal } from "./useFilterModal";
 
