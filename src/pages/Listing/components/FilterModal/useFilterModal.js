@@ -7,7 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useAuth } from "@/hook";
 import { fetchDifficulties } from "@/services";
 
-const useFilterModal = (filterState) => {
+export const useFilterModal = (filterState) => {
   const { control, handleSubmit, reset } = useForm({
     defaultValues: { ...filterState },
   });
@@ -45,5 +45,3 @@ const useFilterModal = (filterState) => {
     handleReset,
   };
 };
-
-export default useFilterModal;

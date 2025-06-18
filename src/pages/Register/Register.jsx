@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 import { registerCover } from "@/assets";
 import { AuthLayout, AuthForm } from "@/components";
-import { useRegister } from "@/pages/Register";
+import { useRegister } from "./useRegister";
 
 function Register() {
   const { registerFields, register } = useRegister();

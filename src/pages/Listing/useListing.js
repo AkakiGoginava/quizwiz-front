@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { fetchQuizzes } from "@/services";
 
-const useListing = () => {
+export const useListing = () => {
   const [filterState, setFilterState] = useState({
     titleSearch: "",
     sortType: "",
@@ -35,5 +35,3 @@ const useListing = () => {
     isLoadingQuizzes,
   };
 };
-
-export default useListing;

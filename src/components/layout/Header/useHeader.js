@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 
 import { useAuth } from "@/hook";
 
-const useHeader = () => {
+export const useHeader = () => {
   const { logout, user, isLoading } = useAuth();
   const [isModalOpen, setModalOpen] = React.useState(false);
   const location = useLocation();
@@ -17,5 +17,3 @@ const useHeader = () => {
     location,
   };
 };
-
-export default useHeader;

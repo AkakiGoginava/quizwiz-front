@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 
 import { fetchCategories } from "@/services";
 
-const useFilterTab = (filterState, setFilterState) => {
+export const useFilterTab = (filterState, setFilterState) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -73,5 +73,3 @@ const useFilterTab = (filterState, setFilterState) => {
     setSearchParams,
   };
 };
-
-export default useFilterTab;

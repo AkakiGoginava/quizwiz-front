@@ -1,7 +1,8 @@
 import React from "react";
 
 import { ArrowShortIcon, SpinningWheelIcon } from "@/components";
-import { FilterTab, QuizCard, useListing } from "@/pages/Listing";
+import { FilterTab, QuizCard } from "@/pages/Listing";
+import { useListing } from "./useListing";
 
 function Listing() {
   const {

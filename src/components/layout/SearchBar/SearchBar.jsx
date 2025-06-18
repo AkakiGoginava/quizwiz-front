@@ -1,7 +1,8 @@
 import React from "react";
 
 import { cn } from "@/helper";
-import { SearchIcon, CrossIcon, useSearchBar } from "@/components";
+import { SearchIcon, CrossIcon } from "@/components";
+import { useSearchBar } from "./useSearchBar";
 
 function SearchBar() {
   const { isOpen, inputRef, openSearch, closeSearch, onSubmit } =

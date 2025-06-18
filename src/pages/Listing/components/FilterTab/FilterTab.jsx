@@ -2,7 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import { FilterIcon } from "@/components";
-import { CategoryCarousel, FilterModal, useFilterTab } from "@/pages/Listing";
+import { CategoryCarousel, FilterModal } from "@/pages/Listing";
+import { useFilterTab } from "./useFilterTab";
 
 function FilterTab({ filterState, setFilterState }) {
   const { categories, isLoadingCategories, isModalOpen, setIsModalOpen } =

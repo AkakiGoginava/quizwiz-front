@@ -3,7 +3,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import { logo } from "@/assets";
-import { DotIcon, ProfileModal, SearchBar, useHeader } from "@/components";
+import { DotIcon, ProfileModal, SearchBar } from "@/components";
+import { useHeader } from "./useHeader";
 
 function Header() {
   const { logout, user, isLoading, isModalOpen, setModalOpen, location } =

@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { useAuth } from "@/hook";
 import { checkUniqueInput } from "@/services";
 
-const useRegister = () => {
+export const useRegister = () => {
   const timeoutRef = useRef(null);
   const fieldNames = {
     email: "Email",
@@ -88,5 +88,3 @@ const useRegister = () => {
 
   return { registerFields, register };
 };
-
-export default useRegister;

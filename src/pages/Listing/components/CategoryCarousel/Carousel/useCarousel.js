@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const useCarousel = (containerRef) => {
+export const useCarousel = (containerRef) => {
   const [atStart, setAtStart] = useState(true);
   const [atEnd, setAtEnd] = useState(false);
 
@@ -30,5 +30,3 @@ const useCarousel = (containerRef) => {
 
   return { atStart, atEnd, handleScroll };
 };
-
-export default useCarousel;

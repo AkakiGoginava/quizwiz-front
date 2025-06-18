@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import { ArrowIcon } from "@/components";
 import { cn } from "@/helper";
-import { useCarousel } from "@/pages/Listing";
+import { useCarousel } from "./useCarousel";
 
 function Carousel({ children, containerRef }) {
   const { atStart, atEnd, handleScroll } = useCarousel(containerRef);

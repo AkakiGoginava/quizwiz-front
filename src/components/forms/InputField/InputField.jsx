@@ -1,8 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { useInputField } from "@/components";
-
+import { useInputField } from "./useInputField";
 import {
   InputErrorMessage,
   AlertIcon,

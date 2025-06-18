@@ -3,7 +3,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 
 import { handleSubmit } from "@/components/layout/helpers";
 
-const useSearchBar = () => {
+export const useSearchBar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const inputRef = useRef(null);
   const [searchParams] = useSearchParams();
@@ -37,5 +37,3 @@ const useSearchBar = () => {
     searchParams,
   };
 };
-
-export default useSearchBar;

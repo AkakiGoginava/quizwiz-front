@@ -1,6 +1,6 @@
 import React from "react";
 
-const useInputField = (type) => {
+export const useInputField = (type) => {
   const [inputType, setInputType] = React.useState(type);
 
   const toggleHide = () => {
@@ -9,5 +9,3 @@ const useInputField = (type) => {
 
   return { inputType, toggleHide };
 };
-
-export default useInputField;

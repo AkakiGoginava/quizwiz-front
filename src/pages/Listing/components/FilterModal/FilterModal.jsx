@@ -11,12 +11,9 @@ import {
   ArrowLongIcon,
   DiamondIcon,
 } from "@/components";
-import {
-  ToggleRadioGroup,
-  MultipleChoiceGroup,
-  useFilterModal,
-} from "@/pages/Listing";
-import { onSubmit } from "@/pages/Listing/components/FilterModal/helpers";
+import { ToggleRadioGroup, MultipleChoiceGroup } from "@/pages/Listing";
+import { onSubmit } from "./helpers";
+import { useFilterModal } from "./useFilterModal";
 
 function FilterModal({ isOpen, setIsOpen, categories, filterState }) {
   const {
