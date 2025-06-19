@@ -15,7 +15,7 @@ function formatTime(timeStr, longFormat = true) {
       return `${unit.value}${name}${plural}`;
     });
 
-  return parts.join("") || (longFormat ? "0Second" : "0s");
+  return parts.join(" ") || (longFormat ? "0Second" : "0s");
 }
 
 export default formatTime;

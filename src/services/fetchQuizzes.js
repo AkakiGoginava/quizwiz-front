@@ -2,6 +2,7 @@ import { axiosInstance } from "@/services";
 
 async function fetchQuizzes({
   pageParam = 0,
+  perPage = 9,
   sortType = "",
   titleSearch = "",
   completedFilter = "",
@@ -10,6 +11,7 @@ async function fetchQuizzes({
 }) {
   const params = {
     cursor: pageParam,
+    per_page: perPage,
     ...(sortType && {
       sort: sortType,
     }),

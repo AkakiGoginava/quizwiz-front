@@ -5,11 +5,7 @@ import { fetchQuizzes } from "@/services";
 import { useAuth } from "@/hook";
 
 export const useListing = () => {
-  const { user } = useAuth();
-
-  const userQuizzes = user?.quizzes
-    ? Object.fromEntries(user.quizzes.map((quiz) => [quiz.quiz_id, quiz]))
-    : {};
+  const { userQuizzes } = useAuth();
 
   const [filterState, setFilterState] = useState({
     titleSearch: "",
