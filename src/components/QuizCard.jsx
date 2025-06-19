@@ -1,9 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { CompletedIcon, NotCompletedIcon, PointsIcon } from "@/components";
-import { formatTime } from "@/helper";
 import { useNavigate } from "react-router-dom";
+
+import {
+  CompletedIcon,
+  DotList,
+  NotCompletedIcon,
+  PointsIcon,
+} from "@/components";
+import { formatTime } from "@/helper";
 
 function QuizCard({
   id,
@@ -25,23 +31,11 @@ function QuizCard({
       onClick={() => navigate(`/quizzes/${id}`)}
       className="flex flex-col w-98.5 gap-8 px-6 pt-6 pb-8 rounded-2xl shadow-lg transition hover:bg-gray-200 hover:cursor-pointer hover:shadow-2xl"
     >
-      <img src={image} className="h-60 w-86" alt="quiz image" />
+      <img src={image} className="h-60 w-86 object-cover" alt="quiz image" />
 
       <div className="flex flex-col gap-5">
         <div className="flex flex-col gap-3">
-          <div className="w-full overflow-ellipsis">
-            {categories?.map((category, i) => (
-              <React.Fragment key={i}>
-                <span className="font-semibold text-blue text-sm">
-                  {category.name}
-                </span>
-
-                {i < categories.length - 1 && (
-                  <span className="mx-1.5 text-gray-300 text-sm">•</span>
-                )}
-              </React.Fragment>
-            ))}
-          </div>
+          <DotList items={categories} />
 
           <h2 className="font-semibold text-2xl w-full whitespace-nowrap overflow-hidden text-ellipsis">
             {title}
