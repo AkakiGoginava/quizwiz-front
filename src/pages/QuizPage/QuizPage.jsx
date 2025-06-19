@@ -1,7 +1,6 @@
 import React from "react";
 
-import { Link, useNavigate, useParams } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
+import { Link } from "react-router-dom";
 
 import {
   AlternativePointsIcon,
@@ -12,25 +11,14 @@ import {
   RocketIcon,
   TimeIcon,
 } from "@/components";
-import { fetchQuiz } from "@/services";
 import { formatTime } from "@/helper";
-import { useAuth } from "@/hook";
+import { useQuizPage } from "./useQuizPage";
 
 function QuizPage() {
-  const navigate = useNavigate();
-  const { id: openQuizId } = useParams();
-  const { userQuizzes } = useAuth();
+  const { navigate, userQuizzes, isLoading, openQuiz, similarQuizzes } =
+    useQuizPage();
 
-  const { data, isLoading } = useQuery({
-    queryKey: ["quiz", openQuizId],
-    queryFn: () => fetchQuiz(openQuizId),
-    enabled: !!openQuizId,
-  });
-
-  const openQuiz = data?.data;
-  const similarQuizzes = data?.similar_quizzes;
-
-  if (!data)
+  if (!openQuiz)
     return <div className="size-full text-center">Quiz not found.</div>;
   if (isLoading) return <div className="size-full text-center">Loading...</div>;
 
@@ -90,7 +78,7 @@ function QuizPage() {
                   </div>
                 </div>
 
-                {!userQuizzes[openQuizId] && (
+                {!userQuizzes[openQuiz.id] && (
                   <Link
                     to=""
                     className="font-semibold text-white bg-blue rounded-xl py-3 px-31 mr-auto transition hover:cursor-pointer hover:opacity-85"
@@ -115,28 +103,18 @@ function QuizPage() {
           </section>
 
           <section className="flex flex-col gap-8">
-            {similarQuizzes?.map((quiz) => {
-              const completedQuiz = userQuizzes[quiz.id];
-              return (
-                <div
-                  key={quiz.id}
-                  className="border border-gray-200 rounded-xl"
-                >
-                  <QuizCard
-                    id={quiz.id}
-                    completeDate={completedQuiz?.complete_date}
-                    time={completedQuiz?.complete_time}
-                    points={completedQuiz?.points}
-                    totalPoints={quiz.points}
-                    title={quiz.title}
-                    totalUsers={quiz.total_users}
-                    difficulty={quiz.difficulty}
-                    image={quiz.image}
-                    categories={quiz.categories}
-                  />
-                </div>
-              );
-            })}
+            {similarQuizzes?.map((quiz) => (
+              <div key={quiz.id} className="border border-gray-200 rounded-xl">
+                <QuizCard
+                  id={quiz.id}
+                  title={quiz.title}
+                  totalUsers={quiz.total_users}
+                  difficulty={quiz.difficulty}
+                  image={quiz.image}
+                  categories={quiz.categories}
+                />
+              </div>
+            ))}
           </section>
         </div>
       </div>

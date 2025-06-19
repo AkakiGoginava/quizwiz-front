@@ -16,7 +16,7 @@ function QuizCard({
   completeDate = null,
   time = null,
   points = null,
-  totalPoints,
+  totalPoints = null,
   title,
   totalUsers,
   difficulty,
