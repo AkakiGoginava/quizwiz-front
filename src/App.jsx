@@ -8,8 +8,9 @@ import {
   Login,
   Register,
   ResetPassword,
-  Listing,
+  QuizListing,
   QuizPage,
+  QuizzesLayout,
 } from "@/pages";
 
 function App() {
@@ -17,8 +18,11 @@ function App() {
     <Layout>
       <Routes>
         <Route path="/" element={<Landing />} />
-        <Route path="/quizzes" element={<Listing />} />
-        <Route path="/quizzes/:id" element={<QuizPage />} />
+
+        <Route path="/quizzes" element={<QuizzesLayout />}>
+          <Route index element={<QuizListing />} />
+          <Route path=":id" element={<QuizPage />} />
+        </Route>
 
         <Route element={<GuestRoute />}>
           <Route path="/register" element={<Register />} />

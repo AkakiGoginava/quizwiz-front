@@ -4,7 +4,7 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import { fetchQuizzes } from "@/services";
 import { useAuth } from "@/hook";
 
-export const useListing = () => {
+export const useQuizListing = () => {
   const { userQuizzes } = useAuth();
 
   const [filterState, setFilterState] = useState({

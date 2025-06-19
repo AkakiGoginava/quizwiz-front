@@ -2,9 +2,9 @@ import React from "react";
 
 import { ArrowShortIcon, SpinningWheelIcon, QuizCard } from "@/components";
 import { FilterTab } from "./components";
-import { useListing } from "./useListing";
+import { useQuizListing } from "./useQuizListing";
 
-function Listing() {
+function QuizListing() {
   const {
     filterState,
     setFilterState,
@@ -14,7 +14,7 @@ function Listing() {
     isFetchingNextPage,
     isLoadingQuizzes,
     userQuizzes,
-  } = useListing();
+  } = useQuizListing();
 
   return (
     <div className="px-23 size-full mb-17.5">
@@ -72,4 +72,4 @@ function Listing() {
   );
 }
 
-export default Listing;
+export default QuizListing;
