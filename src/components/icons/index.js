@@ -15,3 +15,8 @@ export { default as SearchIcon } from "./search-icon.svg?react";
 export { default as CrossIcon } from "./cross-icon.svg?react";
 export { default as DiamondIcon } from "./diamond-icon.svg?react";
 export { default as CheckmarkIcon } from "./checkmark-icon.svg?react";
+export { default as PointsIcon } from "./points-icon.svg?react";
+export { default as AlternativePointsIcon } from "./alternative-points-icon.svg?react";
+export { default as HashtagIcon } from "./hashtag-icon.svg?react";
+export { default as RocketIcon } from "./rocket-icon.svg?react";
+export { default as TimeIcon } from "./time-icon.svg?react";

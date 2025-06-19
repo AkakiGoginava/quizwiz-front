@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import { FilterIcon } from "@/components";
-import { FilterModal, CategoryCarousel } from "./";
+import { FilterModal, CategoryCarousel } from ".";
 import { useFilterTab } from "./useFilterTab";
 
 function FilterTab({ filterState, setFilterState }) {

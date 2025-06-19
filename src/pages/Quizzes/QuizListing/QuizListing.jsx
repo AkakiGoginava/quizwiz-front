@@ -1,10 +1,10 @@
 import React from "react";
 
-import { ArrowShortIcon, SpinningWheelIcon } from "@/components";
-import { FilterTab, QuizCard } from "./components";
-import { useListing } from "./useListing";
+import { ArrowShortIcon, SpinningWheelIcon, QuizCard } from "@/components";
+import { FilterTab } from "./components";
+import { useQuizListing } from "./useQuizListing";
 
-function Listing() {
+function QuizListing() {
   const {
     filterState,
     setFilterState,
@@ -13,7 +13,8 @@ function Listing() {
     hasNextPage,
     isFetchingNextPage,
     isLoadingQuizzes,
-  } = useListing();
+    userQuizzes,
+  } = useQuizListing();
 
   return (
     <div className="px-23 size-full mb-17.5">
@@ -21,16 +22,24 @@ function Listing() {
 
       <section className="relative grid grid-cols-[repeat(auto-fit,minmax(25rem,1fr))] gap-y-8 mt-10">
         {quizzes?.pages.map((page) =>
-          page.data.map((quiz) => (
-            <QuizCard
-              key={quiz.id}
-              title={quiz.title}
-              totalUsers={quiz.total_users}
-              difficulty={quiz.difficulty}
-              image={quiz.image}
-              categories={quiz.categories}
-            />
-          ))
+          page.data.map((quiz) => {
+            const completedQuiz = userQuizzes[quiz.id];
+            return (
+              <QuizCard
+                key={quiz.id}
+                id={quiz.id}
+                completeDate={completedQuiz?.complete_date}
+                time={completedQuiz?.complete_time}
+                points={completedQuiz?.points}
+                totalPoints={quiz.points}
+                title={quiz.title}
+                totalUsers={quiz.total_users}
+                difficulty={quiz.difficulty}
+                image={quiz.image}
+                categories={quiz.categories}
+              />
+            );
+          })
         )}
 
         {isLoadingQuizzes && (
@@ -63,4 +72,4 @@ function Listing() {
   );
 }
 
-export default Listing;
+export default QuizListing;

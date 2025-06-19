@@ -32,6 +32,10 @@ export function AuthProvider({ children }) {
     staleTime: Infinity,
   });
 
+  const userQuizzes = user?.data?.quizzes
+    ? Object.fromEntries(user.data.quizzes.map((quiz) => [quiz.quiz_id, quiz]))
+    : {};
+
   const handleRegister = useAuthMutation(registerUser, {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["user"] });
@@ -102,6 +106,7 @@ export function AuthProvider({ children }) {
     <AuthContext.Provider
       value={{
         user: user?.data,
+        userQuizzes,
         register: handleRegister,
         login: handleLogin,
         logout: handleLogout,

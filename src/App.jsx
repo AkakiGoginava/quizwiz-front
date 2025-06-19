@@ -1,14 +1,16 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 
-import { Layout, AuthRoute, GuestRoute, TokenGuard } from "@/components";
+import { Layout, GuestRoute, TokenGuard } from "@/components";
 import {
   ForgotPassword,
   Landing,
   Login,
   Register,
   ResetPassword,
-  Listing,
+  QuizListing,
+  QuizPage,
+  QuizzesLayout,
 } from "@/pages";
 
 function App() {
@@ -16,7 +18,11 @@ function App() {
     <Layout>
       <Routes>
         <Route path="/" element={<Landing />} />
-        <Route path="/quizzes" element={<Listing />} />
+
+        <Route path="/quizzes" element={<QuizzesLayout />}>
+          <Route index element={<QuizListing />} />
+          <Route path=":id" element={<QuizPage />} />
+        </Route>
 
         <Route element={<GuestRoute />}>
           <Route path="/register" element={<Register />} />

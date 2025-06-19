@@ -31,8 +31,8 @@ function FilterModal({ isOpen, setIsOpen, categories, filterState }) {
   if (isLoadingDifficulties) return <div>...</div>;
 
   const completedFilterOptions = [
-    { label: "My quizzes", value: "completed" },
-    { label: "Not completed", value: "notCompleted" },
+    { label: "My quizzes", value: "true" },
+    { label: "Not completed", value: "false" },
   ];
 
   const sortOptions = [
