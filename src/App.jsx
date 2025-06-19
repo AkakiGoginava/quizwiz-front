@@ -11,6 +11,7 @@ import {
   QuizListing,
   QuizPage,
   QuizzesLayout,
+  QuizSubmitPage,
 } from "@/pages";
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
         <Route path="/quizzes" element={<QuizzesLayout />}>
           <Route index element={<QuizListing />} />
           <Route path=":id" element={<QuizPage />} />
+          <Route path=":id/submit" element={<QuizSubmitPage />} />
         </Route>
 
         <Route element={<GuestRoute />}>

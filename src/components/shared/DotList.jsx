@@ -1,12 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-function DotList({ items }) {
+function DotList({ items, textColor = "#4b69fd" }) {
   return (
     <div className="w-full overflow-ellipsis">
       {items?.map((category, i) => (
         <React.Fragment key={i}>
-          <span className="font-semibold text-blue text-sm">
+          <span className="font-semibold text-sm" style={{ color: textColor }}>
             {category.name}
           </span>
           {i < items.length - 1 && (
@@ -24,6 +24,7 @@ DotList.propTypes = {
       name: PropTypes.string.isRequired,
     })
   ).isRequired,
+  textColor: PropTypes.string,
 };
 
 export default DotList;

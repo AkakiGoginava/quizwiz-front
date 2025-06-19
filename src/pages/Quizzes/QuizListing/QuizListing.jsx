@@ -56,12 +56,15 @@ function QuizListing() {
           >
             {isFetchingNextPage ? (
               <>
-                <SpinningWheelIcon className="size-5 animate-spin" />
+                <SpinningWheelIcon
+                  className="size-5 animate-spin"
+                  strokeWidth={3}
+                />
                 <p>Loading..</p>
               </>
             ) : (
               <>
-                <ArrowShortIcon className="size-5" />
+                <ArrowShortIcon className="size-5" strokeWidth={3} />
                 <p>Load more</p>
               </>
             )}
