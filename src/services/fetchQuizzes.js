@@ -17,7 +17,7 @@ async function fetchQuizzes({
       "filter[title]": titleSearch,
     }),
     ...(completedFilter && {
-      "filter[completed]": completedFilter,
+      "filter[my_quizzes]": completedFilter,
     }),
     ...(categoryFilter.length > 0 && {
       "filter[categories.id]": categoryFilter.join(","),

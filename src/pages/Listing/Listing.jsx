@@ -1,7 +1,7 @@
 import React from "react";
 
-import { ArrowShortIcon, SpinningWheelIcon } from "@/components";
-import { FilterTab, QuizCard } from "./components";
+import { ArrowShortIcon, SpinningWheelIcon, QuizCard } from "@/components";
+import { FilterTab } from "./components";
 import { useListing } from "./useListing";
 
 function Listing() {
@@ -24,10 +24,10 @@ function Listing() {
         {quizzes?.pages.map((page) =>
           page.data.map((quiz) => {
             const completedQuiz = userQuizzes[quiz.id];
-
             return (
               <QuizCard
                 key={quiz.id}
+                id={quiz.id}
                 completeDate={completedQuiz?.complete_date}
                 time={completedQuiz?.complete_time}
                 points={completedQuiz?.points}

@@ -2,9 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import { CompletedIcon, NotCompletedIcon, PointsIcon } from "@/components";
-import formatTime from "@/helper";
+import { formatTime } from "@/helper";
+import { useNavigate } from "react-router-dom";
 
 function QuizCard({
+  id,
   completeDate = null,
   time = null,
   points = null,
@@ -15,10 +17,14 @@ function QuizCard({
   categories,
   image,
 }) {
+  const navigate = useNavigate();
   const date = new Date(completeDate);
 
   return (
-    <div className="flex flex-col w-98.5 gap-8 px-6 pt-6 pb-8 rounded shadow-lg">
+    <div
+      onClick={() => navigate(`/quizzes/${id}`)}
+      className="flex flex-col w-98.5 gap-8 px-6 pt-6 pb-8 rounded-2xl shadow-lg transition hover:bg-gray-200 hover:cursor-pointer hover:shadow-2xl"
+    >
       <img src={image} className="h-60 w-86" alt="quiz image" />
 
       <div className="flex flex-col gap-5">
@@ -119,6 +125,7 @@ function QuizCard({
 QuizCard.propTypes = {
   completeDate: PropTypes.string,
   time: PropTypes.string,
+  id: PropTypes.number,
   points: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   totalPoints: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   title: PropTypes.string.isRequired,
