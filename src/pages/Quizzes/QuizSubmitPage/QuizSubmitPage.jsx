@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
+import { Controller, useForm } from "react-hook-form";
 
 import {
   AlternativePointsIcon,
-  CrossIcon,
   DotList,
   HashtagIcon,
   PinIcon,
@@ -15,10 +15,12 @@ import {
 } from "@/components";
 import { formatTime } from "@/helper";
 import { fetchQuiz } from "@/services";
-import { QuizQuestion } from "./components";
+import { QuizQuestion, QuizSubmitHeader } from "./components";
 
 function QuizSubmitPage() {
+  const { control, handleSubmit } = useForm();
   const { id: openQuizId } = useParams();
+  const [timeLeft, setTimeLeft] = useState(null);
 
   const { data, isLoading } = useQuery({
     queryKey: ["quiz", openQuizId],
@@ -29,13 +31,36 @@ function QuizSubmitPage() {
   const openQuiz = data?.data;
   const questions = openQuiz?.questions;
 
+  useEffect(() => {
+    if (!openQuiz?.max_time) return;
+
+    const [h, m, s] = openQuiz.max_time.split(":").map(Number);
+    let totalSeconds = h * 3600 + m * 60 + s;
+    setTimeLeft(totalSeconds);
+
+    const timer = setInterval(() => {
+      setTimeLeft((prev) => {
+        if (prev <= 1) {
+          clearInterval(timer);
+        }
+        return prev > 0 ? prev - 1 : 0;
+      });
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [openQuiz?.max_time]);
+
+  function formatSeconds(secs) {
+    const m = Math.floor(secs / 60);
+    const s = secs % 60;
+    return `${m} : ${s.toString().padStart(2, "0")}`;
+  }
+
   return (
     <div className="size-full">
-      <header className="flex px-24 py-6 w-full border-b border-gray-200">
-        <CrossIcon className="ml-auto size-6 text-gray-800 transition hover:cursor-pointer hover:opacity-80" />
-      </header>
+      <QuizSubmitHeader quiz={openQuiz} isLoading={isLoading} />
 
-      <section className="flex flex-col py-15 px-25">
+      <section className="flex flex-col gap-23.5 py-15 px-25 mt-18">
         <div className="flex flex-col gap-6 w-full">
           <h1 className="text-center font-bold text-4.5xl">
             {openQuiz?.title}
@@ -82,19 +107,47 @@ function QuizSubmitPage() {
           </section>
         </div>
 
-        <div className="flex gap-10">
+        <form
+          className="flex gap-10"
+          onSubmit={handleSubmit((data) => console.log(data))}
+        >
           <div className="flex flex-col gap-12 w-full">
             {questions?.map((question, index) => (
-              <QuizQuestion
+              <Controller
                 key={question.id}
-                question={question}
-                index={index}
+                name={`answers.${question.id}`}
+                control={control}
+                render={({ field }) => (
+                  <QuizQuestion
+                    question={question}
+                    index={index}
+                    selectedAnswers={field.value}
+                    setSelectedAnswers={field.onChange}
+                  />
+                )}
               />
             ))}
           </div>
 
-          <div className="w-100 h-full"></div>
-        </div>
+          <div className="sticky top-28 w-100 h-full">
+            <div className="relative flex flex-col items-center px-8 pb-9.5 text-gray-600 w-full border border-gray-200 rounded-lg">
+              <h6 className="absolute -translate-y-1/2 font-semibold py-3 px-5 bg-white border rounded-lg border-gray-200 text-center">
+                Timer
+              </h6>
+
+              <span className="text-6xl pt-10 pb-3 px-8 border-b border-gray-300">
+                {timeLeft !== null ? formatSeconds(timeLeft) : "--:--"}
+              </span>
+
+              <button
+                type="submit"
+                className="bg-blue font-semibold rounded-xl py-3.5 px-32 mt-8 text-white transition hover:cursor-pointer hover:opacity-85"
+              >
+                Submit
+              </button>
+            </div>
+          </div>
+        </form>
       </section>
 
       {isLoading && (
