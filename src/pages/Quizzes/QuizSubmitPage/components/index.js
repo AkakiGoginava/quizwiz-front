@@ -1,1 +1,2 @@
-export { default as QuizQuestion } from "./QuizQuestion";
+export * from "./QuizSubmitHeader";
+export * from "./QuizQuestion";
