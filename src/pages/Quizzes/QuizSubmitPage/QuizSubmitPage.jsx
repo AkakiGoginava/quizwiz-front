@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
-import { useQuery } from "@tanstack/react-query";
-import { useParams } from "react-router-dom";
-import { Controller, useForm } from "react-hook-form";
+import { Controller } from "react-hook-form";
 
 import {
   AlternativePointsIcon,
@@ -14,47 +12,24 @@ import {
   TimeIcon,
 } from "@/components";
 import { formatTime } from "@/helper";
-import { fetchQuiz } from "@/services";
+
 import { QuizQuestion, QuizSubmitHeader } from "./components";
+import { formatSeconds } from "./helpers";
+import { useQuizSubmitPage } from "./useQuizSubmitPage";
 
 function QuizSubmitPage() {
-  const { control, handleSubmit } = useForm();
-  const { id: openQuizId } = useParams();
-  const [timeLeft, setTimeLeft] = useState(null);
+  const {
+    control,
+    handleSubmit,
+    timeLeft,
+    isLoading,
+    openQuiz,
+    questions,
+    isPending,
+    isSuccess,
+  } = useQuizSubmitPage();
 
-  const { data, isLoading } = useQuery({
-    queryKey: ["quiz", openQuizId],
-    queryFn: () => fetchQuiz(openQuizId),
-    enabled: !!openQuizId,
-  });
-
-  const openQuiz = data?.data;
-  const questions = openQuiz?.questions;
-
-  useEffect(() => {
-    if (!openQuiz?.max_time) return;
-
-    const [h, m, s] = openQuiz.max_time.split(":").map(Number);
-    let totalSeconds = h * 3600 + m * 60 + s;
-    setTimeLeft(totalSeconds);
-
-    const timer = setInterval(() => {
-      setTimeLeft((prev) => {
-        if (prev <= 1) {
-          clearInterval(timer);
-        }
-        return prev > 0 ? prev - 1 : 0;
-      });
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, [openQuiz?.max_time]);
-
-  function formatSeconds(secs) {
-    const m = Math.floor(secs / 60);
-    const s = secs % 60;
-    return `${m} : ${s.toString().padStart(2, "0")}`;
-  }
+  if (!isSuccess) return <div>something went wrong</div>;
 
   return (
     <div className="size-full">
@@ -150,7 +125,7 @@ function QuizSubmitPage() {
         </form>
       </section>
 
-      {isLoading && (
+      {(isLoading || isPending) && (
         <div className="fixed inset-0 flex items-center justify-center bg-black/30 backdrop-blur-xs">
           <SpinningWheelIcon
             className="size-37 animate-spin"
