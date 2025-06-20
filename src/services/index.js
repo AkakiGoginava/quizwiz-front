@@ -12,3 +12,4 @@ export { default as fetchCategories } from "./fetchCategories";
 export { default as fetchDifficulties } from "./fetchDifficulties";
 export { default as fetchQuiz } from "./fetchQuiz";
 export { default as startQuiz } from "./startQuiz";
+export { default as endQuiz } from "./endQuiz";

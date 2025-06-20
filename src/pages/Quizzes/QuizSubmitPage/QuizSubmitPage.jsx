@@ -16,24 +16,42 @@ import { formatTime } from "@/helper";
 import { QuizQuestion, QuizSubmitHeader } from "./components";
 import { formatSeconds } from "./helpers";
 import { useQuizSubmitPage } from "./useQuizSubmitPage";
+import ResultModal from "./components/ResultModal";
 
 function QuizSubmitPage() {
   const {
     control,
+    openQuizId,
     handleSubmit,
     timeLeft,
-    isLoading,
+    isLoadingQuiz,
     openQuiz,
     questions,
-    isPending,
-    isSuccess,
+    isPendingStart,
+    isSuccessStart,
+    attemptId,
+    isPendingEnd,
+    isSuccessEnd,
+    endQuizMutate,
+    resultPoints,
+    resultTime,
+    resultModalOpen,
+    setResultModalOpen,
   } = useQuizSubmitPage();
 
-  if (!isSuccess) return <div>something went wrong</div>;
+  if (!isSuccessStart) return <div>Could not start quiz</div>;
 
   return (
     <div className="size-full">
-      <QuizSubmitHeader quiz={openQuiz} isLoading={isLoading} />
+      <ResultModal
+        quiz={openQuiz}
+        resultTime={resultTime}
+        resultPoints={resultPoints}
+        isOpen={resultModalOpen}
+        isPendingEnd={isPendingEnd}
+      />
+
+      <QuizSubmitHeader quiz={openQuiz} isLoading={isLoadingQuiz} />
 
       <section className="flex flex-col gap-23.5 py-15 px-25 mt-18">
         <div className="flex flex-col gap-6 w-full">
@@ -84,7 +102,11 @@ function QuizSubmitPage() {
 
         <form
           className="flex gap-10"
-          onSubmit={handleSubmit((data) => console.log(data))}
+          onSubmit={handleSubmit((answers) => {
+            setResultModalOpen(true);
+
+            return endQuizMutate({ quizId: openQuizId, attemptId, answers });
+          })}
         >
           <div className="flex flex-col gap-12 w-full">
             {questions?.map((question, index) => (
@@ -125,7 +147,7 @@ function QuizSubmitPage() {
         </form>
       </section>
 
-      {(isLoading || isPending) && (
+      {(isLoadingQuiz || isPendingStart) && (
         <div className="fixed inset-0 flex items-center justify-center bg-black/30 backdrop-blur-xs">
           <SpinningWheelIcon
             className="size-37 animate-spin"

@@ -1,4 +1,4 @@
-import { fetchQuiz, startQuiz } from "@/services";
+import { endQuiz, fetchQuiz, startQuiz } from "@/services";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -13,20 +13,40 @@ function useStartQuiz(setAttemptId) {
   });
 }
 
+function useEndQuiz(setResultTime, setResultPoints) {
+  return useMutation({
+    mutationFn: ({ quizId, attemptId, answers }) =>
+      endQuiz(quizId, attemptId, answers),
+    onSuccess: (response) => {
+      setResultTime(response.result_time);
+      setResultPoints(response.result_points);
+    },
+  });
+}
+
 export const useQuizSubmitPage = () => {
   const { id: openQuizId } = useParams();
   const { control, handleSubmit } = useForm();
 
   const [timeLeft, setTimeLeft] = useState(null);
   const [attemptId, setAttemptId] = useState(null);
+  const [resultTime, setResultTime] = useState(null);
+  const [resultPoints, setResultPoints] = useState(null);
+  const [resultModalOpen, setResultModalOpen] = useState(false);
 
   const {
     mutate: startQuizMutate,
-    isPending,
-    isSuccess,
+    isPendng: isPendingStart,
+    isSuccess: isSuccessStart,
   } = useStartQuiz(setAttemptId);
 
-  const { data, isLoading } = useQuery({
+  const {
+    mutate: endQuizMutate,
+    isPending: isPendingEnd,
+    isSuccess: isSuccessEnd,
+  } = useEndQuiz(setResultTime, setResultPoints);
+
+  const { data, isLoading: isLoadingQuiz } = useQuery({
     queryKey: ["quiz", openQuizId],
     queryFn: () => fetchQuiz(openQuizId),
     enabled: !!openQuizId,
@@ -62,12 +82,21 @@ export const useQuizSubmitPage = () => {
 
   return {
     control,
+    openQuizId,
     handleSubmit,
     timeLeft,
-    isLoading,
+    isLoadingQuiz,
     openQuiz,
     questions,
-    isPending,
-    isSuccess,
+    isPendingStart,
+    isSuccessStart,
+    attemptId,
+    endQuizMutate,
+    isPendingEnd,
+    isSuccessEnd,
+    resultPoints,
+    resultTime,
+    resultModalOpen,
+    setResultModalOpen,
   };
 };
