@@ -24,6 +24,7 @@ function QuizSubmitPage() {
     openQuizId,
     handleSubmit,
     timeLeft,
+    clearQuizTimer,
     isLoadingQuiz,
     openQuiz,
     questions,
@@ -103,6 +104,8 @@ function QuizSubmitPage() {
         <form
           className="flex gap-10"
           onSubmit={handleSubmit((answers) => {
+            clearQuizTimer();
+
             setResultModalOpen(true);
 
             return endQuizMutate({ quizId: openQuizId, attemptId, answers });

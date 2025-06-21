@@ -1,34 +1,17 @@
-import { endQuiz, fetchQuiz, startQuiz } from "@/services";
-import { useMutation, useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
+
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 
-function useStartQuiz(setAttemptId) {
-  return useMutation({
-    mutationFn: (i) => startQuiz(i),
-    onSuccess: (response) => {
-      setAttemptId(response.attempt_id);
-    },
-  });
-}
+import { fetchQuiz } from "@/services";
 
-function useEndQuiz(setResultTime, setResultPoints) {
-  return useMutation({
-    mutationFn: ({ quizId, attemptId, answers }) =>
-      endQuiz(quizId, attemptId, answers),
-    onSuccess: (response) => {
-      setResultTime(response.result_time);
-      setResultPoints(response.result_points);
-    },
-  });
-}
+import { useEndQuiz, useQuizTimer, useStartQuiz } from "./hooks";
 
 export const useQuizSubmitPage = () => {
   const { id: openQuizId } = useParams();
   const { control, handleSubmit, getValues } = useForm();
 
-  const [timeLeft, setTimeLeft] = useState(null);
   const [attemptId, setAttemptId] = useState(null);
   const [resultTime, setResultTime] = useState(null);
   const [resultPoints, setResultPoints] = useState(null);
@@ -36,7 +19,7 @@ export const useQuizSubmitPage = () => {
 
   const {
     mutate: startQuizMutate,
-    isPendng: isPendingStart,
+    isPending: isPendingStart,
     isSuccess: isSuccessStart,
   } = useStartQuiz(setAttemptId);
 
@@ -61,35 +44,21 @@ export const useQuizSubmitPage = () => {
     }
   }, [openQuizId]);
 
-  useEffect(() => {
-    if (!openQuiz?.max_time) return;
-
-    const [h, m, s] = openQuiz.max_time.split(":").map(Number);
-    const totalSeconds = h * 3600 + m * 60 + s;
-    setTimeLeft(totalSeconds);
-
-    const timer = setInterval(() => {
-      setTimeLeft((prev) => {
-        if (prev <= 1) {
-          clearInterval(timer);
-
-          const answers = getValues("answers");
-
-          setResultModalOpen(true);
-          endQuizMutate({ quizId: openQuizId, attemptId, answers });
-        }
-        return prev > 0 ? prev - 1 : 0;
-      });
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, [openQuiz?.max_time, attemptId]);
+  const [timeLeft, clearQuizTimer] = useQuizTimer(
+    openQuiz?.max_time,
+    attemptId,
+    openQuizId,
+    getValues,
+    endQuizMutate,
+    setResultModalOpen
+  );
 
   return {
     control,
     openQuizId,
     handleSubmit,
     timeLeft,
+    clearQuizTimer,
     isLoadingQuiz,
     openQuiz,
     questions,
