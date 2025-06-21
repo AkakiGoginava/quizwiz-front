@@ -26,7 +26,7 @@ function useEndQuiz(setResultTime, setResultPoints) {
 
 export const useQuizSubmitPage = () => {
   const { id: openQuizId } = useParams();
-  const { control, handleSubmit } = useForm();
+  const { control, handleSubmit, getValues } = useForm();
 
   const [timeLeft, setTimeLeft] = useState(null);
   const [attemptId, setAttemptId] = useState(null);
@@ -72,13 +72,18 @@ export const useQuizSubmitPage = () => {
       setTimeLeft((prev) => {
         if (prev <= 1) {
           clearInterval(timer);
+
+          const answers = getValues("answers");
+
+          setResultModalOpen(true);
+          endQuizMutate({ quizId: openQuizId, attemptId, answers });
         }
         return prev > 0 ? prev - 1 : 0;
       });
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [openQuiz?.max_time]);
+  }, [openQuiz?.max_time, attemptId]);
 
   return {
     control,
