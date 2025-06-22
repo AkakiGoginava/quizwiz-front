@@ -13,10 +13,9 @@ import {
 } from "@/components";
 import { formatTime } from "@/helper";
 
-import { QuizQuestion, QuizSubmitHeader } from "./components";
+import { QuizQuestion, QuizSubmitHeader, ResultModal } from "./components";
 import { formatSeconds } from "./helpers";
 import { useQuizSubmitPage } from "./useQuizSubmitPage";
-import ResultModal from "./components/ResultModal";
 
 function QuizSubmitPage() {
   const {
@@ -42,6 +41,29 @@ function QuizSubmitPage() {
 
   if (!isSuccessStart) return <div>Could not start quiz</div>;
 
+  const quizInfoItems = [
+    {
+      icon: <PinIcon className="min-h-5 min-w-5" />,
+      content: <DotList textColor="#667085" items={openQuiz?.categories} />,
+    },
+    {
+      icon: <HashtagIcon className="min-h-5 min-w-5" />,
+      content: <span>{openQuiz?.question_count} Questions</span>,
+    },
+    {
+      icon: <AlternativePointsIcon className="min-h-5 min-w-5" />,
+      content: <span>{openQuiz?.points} Points</span>,
+    },
+    {
+      icon: <RocketIcon className="min-h-5 min-w-5" />,
+      content: <span>{openQuiz?.total_users} Plays</span>,
+    },
+    {
+      icon: <TimeIcon className="min-h-5 min-w-5" />,
+      content: <span>{formatTime(openQuiz?.max_time, false)}</span>,
+    },
+  ];
+
   return (
     <div className="size-full">
       <ResultModal
@@ -60,44 +82,18 @@ function QuizSubmitPage() {
             {openQuiz?.title}
           </h1>
 
-          <section className="flex gap-4 justify-center font-semibold text-sm text-gray-500">
-            <div className="flex gap-2 items-center">
-              <PinIcon className="min-h-5 min-w-5" />
-
-              <DotList textColor="#667085" items={openQuiz?.categories} />
-            </div>
-
-            <div className="text-xs font-light">|</div>
-
-            <div className="flex gap-2 items-center">
-              <HashtagIcon />
-
-              <span>{openQuiz?.question_count} Questions</span>
-            </div>
-
-            <div className="text-xs font-light">|</div>
-
-            <div className="flex gap-2 items-center">
-              <AlternativePointsIcon />
-
-              <span>{openQuiz?.points} Points</span>
-            </div>
-
-            <div className="text-xs font-light">|</div>
-
-            <div className="flex gap-2 items-center">
-              <RocketIcon />
-
-              <span>{openQuiz?.total_users} Plays</span>
-            </div>
-
-            <div className="text-xs font-light">|</div>
-
-            <div className="flex gap-2 items-center">
-              <TimeIcon />
-
-              <span>{formatTime(openQuiz?.max_time, false)}</span>
-            </div>
+          <section className="flex gap-4 justify-center items-center font-semibold text-sm text-gray-500">
+            {quizInfoItems.map((item, idx) => (
+              <React.Fragment key={idx}>
+                <div className="flex gap-2 items-center">
+                  {item.icon}
+                  {item.content}
+                </div>
+                {idx < quizInfoItems.length - 1 && (
+                  <div className="text-xs font-light">|</div>
+                )}
+              </React.Fragment>
+            ))}
           </section>
         </div>
 

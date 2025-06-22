@@ -1,4 +1,4 @@
 export * from "./QuizSubmitHeader";
 export * from "./QuizQuestion";
 
-export { default as Resultmodal } from "./ResultModal";
+export { default as ResultModal } from "./ResultModal";
