@@ -80,7 +80,7 @@ function QuizPage() {
 
                 {!userQuizzes[openQuiz.id] && (
                   <Link
-                    to=""
+                    to={`/quizzes/${openQuiz.id}/submit`}
                     className="font-semibold text-white bg-blue rounded-xl py-3 px-31 mr-auto transition hover:cursor-pointer hover:opacity-85"
                   >
                     Start Quiz

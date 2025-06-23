@@ -1,7 +1,7 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 
-import { Layout, GuestRoute, TokenGuard } from "@/components";
+import { Layout, GuestRoute, TokenGuard, QuizGuard } from "@/components";
 import {
   ForgotPassword,
   Landing,
@@ -11,6 +11,7 @@ import {
   QuizListing,
   QuizPage,
   QuizzesLayout,
+  QuizSubmitPage,
 } from "@/pages";
 
 function App() {
@@ -22,6 +23,10 @@ function App() {
         <Route path="/quizzes" element={<QuizzesLayout />}>
           <Route index element={<QuizListing />} />
           <Route path=":id" element={<QuizPage />} />
+
+          <Route element={<QuizGuard />}>
+            <Route path=":id/submit" element={<QuizSubmitPage />} />
+          </Route>
         </Route>
 
         <Route element={<GuestRoute />}>

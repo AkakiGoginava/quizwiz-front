@@ -1,4 +1,6 @@
 function formatTime(timeStr, longFormat = true) {
+  if (!timeStr) return "N/A";
+
   const [hours, minutes, seconds] = timeStr.split(":").map(Number);
 
   const units = [

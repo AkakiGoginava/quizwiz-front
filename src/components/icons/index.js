@@ -20,3 +20,6 @@ export { default as AlternativePointsIcon } from "./alternative-points-icon.svg?
 export { default as HashtagIcon } from "./hashtag-icon.svg?react";
 export { default as RocketIcon } from "./rocket-icon.svg?react";
 export { default as TimeIcon } from "./time-icon.svg?react";
+export { default as PinIcon } from "./pin-icon.svg?react";
+export { default as InfoIcon } from "./info-icon.svg?react";
+export { default as SuccessIcon } from "./success-icon.svg?react";

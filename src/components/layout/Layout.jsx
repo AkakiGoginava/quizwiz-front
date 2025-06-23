@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { useLocation } from "react-router-dom";
+import { matchPath, useLocation } from "react-router-dom";
 
 import { Header, Footer } from "@/components";
 
@@ -15,7 +15,9 @@ function Layout({ children }) {
     "/forgot-password",
   ];
 
-  const hideLayout = noLayoutPaths.includes(pathname);
+  const isQuizSubmitPage = matchPath("/quizzes/:id/submit", pathname);
+
+  const hideLayout = noLayoutPaths.includes(pathname) || isQuizSubmitPage;
 
   return (
     <div className="min-h-screen flex flex-col">
