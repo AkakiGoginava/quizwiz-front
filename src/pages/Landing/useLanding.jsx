@@ -1,4 +1,4 @@
-import fetchLandingInfo from "@/services/fetchLandingInfo";
+import { fetchLandingInfo } from "@/services";
 import { useQuery } from "@tanstack/react-query";
 
 export const useLanding = () => {
