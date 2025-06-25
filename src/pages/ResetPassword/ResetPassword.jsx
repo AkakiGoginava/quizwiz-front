@@ -39,15 +39,13 @@ function ResetPassword() {
 
   return (
     <AuthLayout coverImg={resetCover}>
-      <div className="flex flex-col gap-9.5">
-        <AuthForm
-          fields={resetFields}
-          onSubmit={(data) => resetPassword({ ...data, token, email })}
-          submitText="Reset password"
-          title="Reset password"
-          subTitle="Please type something you'll remember"
-        />
-      </div>
+      <AuthForm
+        fields={resetFields}
+        onSubmit={(data) => resetPassword({ ...data, token, email })}
+        submitText="Reset password"
+        title="Reset password"
+        subTitle="Please type something you'll remember"
+      />
     </AuthLayout>
   );
 }

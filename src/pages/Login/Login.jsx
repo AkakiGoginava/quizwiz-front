@@ -41,25 +41,24 @@ function Login() {
 
   return (
     <AuthLayout coverImg={loginCover}>
-      <div className="flex flex-col gap-9.5">
-        <AuthForm
-          fields={loginFields}
-          onSubmit={login}
-          submitText="Log in"
-          title="Hi, Welcome! 👋"
-          hasForgotPassword={true}
-        />
-
-        <p className="text-sm text-gray-900">
-          Dont have an account?{" "}
-          <Link
-            className="font-semibold text-blue-600 hover:pinter-cursor hover:text-blue-500"
-            to="/register"
-          >
-            Sign up
-          </Link>
-        </p>
-      </div>
+      <AuthForm
+        fields={loginFields}
+        onSubmit={login}
+        submitText="Log in"
+        title="Hi, Welcome! 👋"
+        hasForgotPassword={true}
+        footer={
+          <p className="text-sm text-gray-900">
+            Dont have an account?{" "}
+            <Link
+              className="font-semibold text-blue-600 hover:pinter-cursor hover:text-blue-500"
+              to="/register"
+            >
+              Sign up
+            </Link>
+          </p>
+        }
+      />
     </AuthLayout>
   );
 }

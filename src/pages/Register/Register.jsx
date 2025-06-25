@@ -11,24 +11,23 @@ function Register() {
 
   return (
     <AuthLayout coverImg={registerCover}>
-      <div className="flex flex-col gap-9.5">
-        <AuthForm
-          fields={registerFields}
-          onSubmit={register}
-          submitText="Register"
-          title="Create account"
-        />
-
-        <p className="text-sm text-gray-900">
-          Already have an acount?{" "}
-          <Link
-            to="/login"
-            className="font-semibold text-blue-600 hover:pinter-cursor hover:text-blue-500"
-          >
-            Log in
-          </Link>
-        </p>
-      </div>
+      <AuthForm
+        fields={registerFields}
+        onSubmit={register}
+        submitText="Register"
+        title="Create account"
+        footer={
+          <p className="text-sm text-gray-900">
+            Already have an acount?{" "}
+            <Link
+              to="/login"
+              className="font-semibold text-blue-600 hover:pinter-cursor hover:text-blue-500"
+            >
+              Log in
+            </Link>
+          </p>
+        }
+      />
     </AuthLayout>
   );
 }
