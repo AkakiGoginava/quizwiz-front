@@ -1,7 +1,9 @@
-function formatTime(timeStr, longFormat = true) {
-  if (!timeStr) return "N/A";
+function formatTime(timeInput, longFormat = true) {
+  if (timeInput == null || isNaN(timeInput)) return "N/A";
 
-  const [hours, minutes, seconds] = timeStr.split(":").map(Number);
+  const hours = Math.floor(timeInput / 3600);
+  const minutes = Math.floor((timeInput % 3600) / 60);
+  const seconds = timeInput % 60;
 
   const units = [
     { value: hours, long: "Hour", short: "h" },

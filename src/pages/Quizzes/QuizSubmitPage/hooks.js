@@ -36,9 +36,7 @@ export const useQuizTimer = (
   useEffect(() => {
     if (!maxTime) return;
 
-    const [h, m, s] = maxTime.split(":").map(Number);
-    const totalSeconds = h * 3600 + m * 60 + s;
-    setTimeLeft(totalSeconds);
+    setTimeLeft(maxTime);
 
     timerRef.current = setInterval(() => {
       setTimeLeft((prev) => {

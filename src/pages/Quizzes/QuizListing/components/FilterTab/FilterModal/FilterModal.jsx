@@ -43,11 +43,11 @@ function FilterModal({ isOpen, setIsOpen, categories, filterState }) {
       value: "-title",
     },
     { label: "Most popular", icon: <DiamondIcon />, value: "-total_users" },
-    { label: "Newest", icon: <ArrowDiagonalIcon />, value: "created_at" },
+    { label: "Newest", icon: <ArrowDiagonalIcon />, value: "-created_at" },
     {
       label: "Oldest",
       icon: <ArrowDiagonalIcon className="rotate-180" />,
-      value: "-created_at",
+      value: "created_at",
     },
   ];
 
