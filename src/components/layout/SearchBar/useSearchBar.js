@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 
 import { handleSubmit } from "@/components/layout/helpers";
 
@@ -8,6 +8,7 @@ export const useSearchBar = () => {
   const inputRef = useRef(null);
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const openSearch = () => {
     setIsOpen(true);
@@ -24,7 +25,7 @@ export const useSearchBar = () => {
   };
 
   const onSubmit = (e) => {
-    handleSubmit(e, navigate, inputRef);
+    handleSubmit(e, navigate, inputRef, location);
   };
 
   return {

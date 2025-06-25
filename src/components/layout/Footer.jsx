@@ -26,7 +26,7 @@ function Footer() {
     data?.filter((item) => item.key != "email" && item.key != "phone") || [];
 
   return (
-    <footer className="relative flex gap-25 text-gray-600 text-sm px-24 pt-11 pb-20 border-t border-gray-300">
+    <footer className="relative flex flex-col md:flex-row gap-10 md:gap-25 text-gray-600 text-sm px-10 py-6 md:px-24 md:pt-11 md:pb-6 border-t border-gray-300">
       <div>
         <img className="w-23 h-5" src={logo} alt="logo" />
       </div>
@@ -62,9 +62,11 @@ function Footer() {
         ))}
       </div>
 
-      <p className="absolute bottom-6 right-19">
-        &copy; 2024 QW. All rights reserved
-      </p>
+      <div className="flex flex-col-reverse md:ml-auto md:min-h-45 mt-3.5 md:mt-0">
+        <p className="md:mt-auto text-xs font-raleway font-normal">
+          &copy; 2024 QW. All rights reserved
+        </p>
+      </div>
     </footer>
   );
 }
