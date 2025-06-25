@@ -24,3 +24,4 @@ export { default as PinIcon } from "./pin-icon.svg?react";
 export { default as InfoIcon } from "./info-icon.svg?react";
 export { default as SuccessIcon } from "./success-icon.svg?react";
 export { default as MenuIcon } from "./menu-icon.svg?react";
+export { default as LinkIcon } from "./link-icon.svg?react";
