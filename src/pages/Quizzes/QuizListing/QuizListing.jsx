@@ -17,10 +17,10 @@ function QuizListing() {
   } = useQuizListing();
 
   return (
-    <div className="px-23 size-full mb-17.5">
+    <div className="px-4 md:px-23 size-full mb-17.5">
       <FilterTab filterState={filterState} setFilterState={setFilterState} />
 
-      <section className="relative grid grid-cols-[repeat(auto-fit,minmax(25rem,1fr))] gap-y-8 mt-10">
+      <section className="relative grid grid-cols-[repeat(auto-fit,minmax(25rem,1fr))] gap-y-8 mt-3 md:mt-10">
         {quizzes?.pages.map((page) =>
           page.data.map((quiz) => {
             const completedQuiz = userQuizzes[quiz.id];

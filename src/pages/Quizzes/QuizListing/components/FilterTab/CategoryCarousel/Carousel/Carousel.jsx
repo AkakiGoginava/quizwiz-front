@@ -9,13 +9,13 @@ function Carousel({ children, containerRef }) {
   const { atStart, atEnd, handleScroll } = useCarousel(containerRef);
 
   return (
-    <div className="flex gap-3 w-full overflow-hidden">
+    <div className="flex md:gap-3 w-full overflow-hidden">
       <div className="mt-2.5">
         <ArrowIcon
           onClick={handleScroll}
           data-direction="left"
           className={cn(
-            " transition hover:opacity-50 hover:cursor-pointer size-5",
+            " transition hover:opacity-50 hover:cursor-pointer size-5 hidden md:inline-block",
             {
               "opacity-0 pointer-events-none": atStart,
             }
@@ -30,7 +30,7 @@ function Carousel({ children, containerRef }) {
           onClick={handleScroll}
           data-direction="right"
           className={cn(
-            "transform -scale-x-100 transition hover:opacity-50 hover:cursor-pointer size-5",
+            "transform -scale-x-100 transition hover:opacity-50 hover:cursor-pointer size-5 hidden md:inline-block",
             {
               "opacity-0 pointer-events-none": atEnd,
             }

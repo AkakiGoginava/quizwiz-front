@@ -8,6 +8,7 @@ import { fetchCategories } from "@/services";
 export const useFilterTab = (filterState, setFilterState) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [activeFilterCount, setActiveFilterCount] = useState(0);
 
   useEffect(() => {
     const title = searchParams.get("title");
@@ -56,6 +57,15 @@ export const useFilterTab = (filterState, setFilterState) => {
     setSearchParams(params, { replace: true });
   }, [filterState]);
 
+  useEffect(() => {
+    let count = 0;
+    if (filterState.sortType) count++;
+    if (filterState.completedFilter) count++;
+    count +=
+      filterState.categoryFilter.length + filterState.difficultyFilter.length;
+    setActiveFilterCount(count);
+  }, [filterState]);
+
   const { data: categories, isLoading: isLoadingCategories } = useQuery({
     queryKey: ["categories"],
     queryFn: fetchCategories,
@@ -69,5 +79,6 @@ export const useFilterTab = (filterState, setFilterState) => {
     setIsModalOpen,
     searchParams,
     setSearchParams,
+    activeFilterCount,
   };
 };

@@ -13,7 +13,7 @@ function useAuthMutation(mutationFn, options = {}) {
       onSuccess: (data) => options?.onSuccess(data),
       onError: (error) => {
         const errors = error?.response?.data?.errors ?? {};
-        console.log(error);
+
         Object.entries(errors).forEach(([field, messages]) => {
           setError(field, { type: "server", message: messages[0] });
         });

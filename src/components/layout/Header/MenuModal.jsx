@@ -25,7 +25,7 @@ function MenuModal({ isOpen, onClose, user, logout }) {
 
         <div className="w-full border-b border-gray-200" />
 
-        <Link to="/quizzes" className="text-lg font-semibold">
+        <Link to="/quizzes" className="text-lg font-semibold" onClick={onClose}>
           Quizzes
         </Link>
 

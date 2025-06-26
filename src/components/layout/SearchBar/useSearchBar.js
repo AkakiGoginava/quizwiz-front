@@ -26,6 +26,8 @@ export const useSearchBar = () => {
 
   const onSubmit = (e) => {
     handleSubmit(e, navigate, inputRef, location);
+
+    setIsOpen(false);
   };
 
   return {
