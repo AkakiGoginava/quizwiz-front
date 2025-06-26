@@ -47,7 +47,7 @@ function QuizQuestion({
 
               <label
                 htmlFor={answer.id}
-                className="flex items-center justify-between p-4 hover:cursor-pointer 
+                className="flex items-center justify-between p-4 pr-10 hover:cursor-pointer 
                 border border-transparent rounded-lg transition peer-checked:border peer-checked:text-blue peer-checked:border-blue"
                 onClick={() =>
                   handleAnswerClick(

@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const useQuizSubmitHeader = (quiz) => {
+  const navigate = useNavigate();
+
   const [showQuizInfo, setShowQuizInfo] = useState(false);
 
   useEffect(() => {
@@ -14,5 +17,5 @@ export const useQuizSubmitHeader = (quiz) => {
 
   const categoryNames = quiz?.categories.map((cat) => cat.name).join(", ");
 
-  return { showQuizInfo, categoryNames };
+  return { showQuizInfo, categoryNames, navigate };
 };

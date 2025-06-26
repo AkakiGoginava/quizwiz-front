@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 
 import { Controller } from "react-hook-form";
 
@@ -11,33 +11,30 @@ import {
   SpinningWheelIcon,
   TimeIcon,
 } from "@/components";
-import { formatTime } from "@/helper";
+import { formatTime, formatSeconds } from "@/helper";
 
 import { QuizQuestion, QuizSubmitHeader, ResultModal } from "./components";
-import { formatSeconds } from "./helpers";
 import { useQuizSubmitPage } from "./useQuizSubmitPage";
 
 function QuizSubmitPage() {
   const {
     control,
-    openQuizId,
     handleSubmit,
+    onSubmit,
     timeLeft,
-    clearQuizTimer,
     isLoadingQuiz,
     openQuiz,
     questions,
     isPendingStart,
     isSuccessStart,
-    attemptId,
     isPendingEnd,
-    isSuccessEnd,
-    endQuizMutate,
     resultPoints,
     resultTime,
     resultModalOpen,
-    setResultModalOpen,
+    markedCount,
   } = useQuizSubmitPage();
+
+  const formRef = useRef(null);
 
   if (!isSuccessStart) return <div>Could not start quiz</div>;
 
@@ -74,15 +71,21 @@ function QuizSubmitPage() {
         isPendingEnd={isPendingEnd}
       />
 
-      <QuizSubmitHeader quiz={openQuiz} isLoading={isLoadingQuiz} />
+      <QuizSubmitHeader
+        quiz={openQuiz}
+        isLoading={isLoadingQuiz}
+        timeLeft={timeLeft}
+        onSubmit={handleSubmit(onSubmit)}
+        markedCount={markedCount}
+      />
 
-      <section className="flex flex-col gap-23.5 py-15 px-25 mt-18">
+      <section className="flex flex-col gap-23.5 py-15 px-4.5 md:px-25 mt-30 md:mt-18">
         <div className="flex flex-col gap-6 w-full">
-          <h1 className="text-center font-bold text-4.5xl">
+          <h1 className="text-center text-wrap font-bold text-4.5xl">
             {openQuiz?.title}
           </h1>
 
-          <section className="flex gap-4 justify-center items-center font-semibold text-sm text-gray-500">
+          <section className="flex gap-4 flex-wrap justify-center items-center px-4 md:px-0 font-semibold text-sm text-gray-500">
             {quizInfoItems.map((item, idx) => (
               <React.Fragment key={idx}>
                 <div className="flex gap-2 items-center">
@@ -98,14 +101,9 @@ function QuizSubmitPage() {
         </div>
 
         <form
+          ref={formRef}
           className="flex gap-10"
-          onSubmit={handleSubmit((answers) => {
-            clearQuizTimer();
-
-            setResultModalOpen(true);
-
-            return endQuizMutate({ quizId: openQuizId, attemptId, answers });
-          })}
+          onSubmit={handleSubmit(onSubmit)}
         >
           <div className="flex flex-col gap-12 w-full">
             {questions?.map((question, index) => (
@@ -125,7 +123,7 @@ function QuizSubmitPage() {
             ))}
           </div>
 
-          <div className="sticky top-28 w-100 h-full">
+          <div className="hidden md:block sticky top-28 w-100 h-full">
             <div className="relative flex flex-col items-center px-8 pb-9.5 text-gray-600 w-full border border-gray-200 rounded-lg">
               <h6 className="absolute -translate-y-1/2 font-semibold py-3 px-5 bg-white border rounded-lg border-gray-200 text-center">
                 Timer
