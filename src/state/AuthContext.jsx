@@ -14,6 +14,8 @@ import {
   resetPassword,
 } from "@/services";
 import { useAuthMutation } from "@/hook";
+import { toast } from "react-toastify";
+import { ToastContent } from "@/components";
 
 export const AuthContext = createContext();
 export function AuthProvider({ children }) {
@@ -37,65 +39,135 @@ export function AuthProvider({ children }) {
     : {};
 
   const handleRegister = useAuthMutation(registerUser, {
-    onSuccess: () => {
+    onSuccess: (success) => {
       queryClient.invalidateQueries({ queryKey: ["user"] });
 
       navigate("/");
+
+      toast.success(
+        <ToastContent
+          title="Successful registration"
+          message={success.data.message}
+        />
+      );
     },
     onError: (error) => {
-      console.error("Registration failed:", error);
+      toast.error(
+        <ToastContent
+          title="Registration failed"
+          message={error.response.data.message}
+        />
+      );
     },
   });
 
-  const handleVerify = useAuthMutation(verifyEmail);
+  const handleVerify = useAuthMutation(verifyEmail, {
+    onSuccess: (success) => {
+      toast.success(
+        <ToastContent
+          title="Email verified successfully"
+          message={success.data.message}
+        />
+      );
+    },
+    onError: (error) => {
+      toast.error(
+        <ToastContent
+          title="Could not verify email"
+          message={error.response.data.message}
+        />
+      );
+    },
+  });
 
   const handleLogin = useAuthMutation(loginUser, {
-    onSuccess: async () => {
+    onSuccess: async (success) => {
       await queryClient.invalidateQueries({ queryKey: ["user"] });
 
-      const id = searchParams.get("verify_id");
-      const hash = searchParams.get("verify_hash");
+      const token = searchParams.get("token");
 
-      if (id && hash) {
-        handleVerify({ id, hash }, () => {});
+      if (token) {
+        handleVerify({ token }, () => {});
       }
 
       navigate("/quizzes");
+
+      toast.success(
+        <ToastContent title="Successful login" message={success.data.message} />
+      );
     },
     onError: (error) => {
-      console.error("Login failed:", error);
+      toast.error(
+        <ToastContent
+          title="Login failed"
+          message={error.response.data.message}
+        />
+      );
     },
   });
 
   const handleLogout = useAuthMutation(logoutUser, {
-    onSuccess: (data) => {
+    onSuccess: (success) => {
       queryClient.setQueryData(["user"], null);
-      console.log("Logout successful!", data);
 
       navigate("/");
+
+      toast.success(
+        <ToastContent
+          title="Successful logout"
+          message={success.data.message}
+        />
+      );
     },
     onError: (error) => {
-      console.error("Logout failed:", error);
+      toast.error(
+        <ToastContent
+          title="Logout failed"
+          message={error.response.data.message}
+        />
+      );
     },
   });
 
   const handleForgotPassword = useAuthMutation(forgotPassword, {
-    onSuccess: (data) => {
-      console.log("Forgot password request successful!", data);
+    onSuccess: (success) => {
+      navigate("/");
+
+      toast.success(
+        <ToastContent
+          title="Request sent successfully"
+          message={success.data.message}
+        />
+      );
     },
     onError: (error) => {
-      console.error("Forgot password request failed:", error);
+      toast.error(
+        <ToastContent
+          title="Request failed"
+          message={error.response.data.message}
+        />
+      );
     },
   });
 
   const handleResetPassword = useAuthMutation(resetPassword, {
-    onSuccess: (data) => {
-      console.log("Password reset successful!", data);
-
+    onSuccess: (success) => {
       navigate("/");
+
+      toast.success(
+        <ToastContent
+          title="Password reset successfully"
+          message={success.data.message}
+        />
+      );
     },
     onError: (error) => {
-      console.error("Password reset failed:", error);
+      toast.error(
+        <ToastContent
+          title="Could not reset password"
+          message={error?.response.data.message}
+        />
+      );
     },
   });
 
@@ -112,6 +184,7 @@ export function AuthProvider({ children }) {
         logout: handleLogout,
         forgotPassword: handleForgotPassword,
         resetPassword: handleResetPassword,
+        verifyEmail: handleVerify,
         isAuthenticated,
         isLoading,
       }}

@@ -21,7 +21,7 @@ function SearchBar() {
           "border-light-gray rounded-xl m-6 md:m-0": isOpen,
         })}
       >
-        <SearchIcon />
+        <SearchIcon className="min-w-4 min-h-4" />
 
         <form onSubmit={onSubmit}>
           <input
@@ -32,7 +32,7 @@ function SearchBar() {
             className={cn(
               "border-0 pl-1 w-13 ring-0 pr-0 text-sm hover:cursor-pointer",
               {
-                "border-r border-light-gray placeholder:text-light-gray w-81 md:w-74 mr-3 pr-3 hover:cursor-text":
+                "border-r border-light-gray placeholder:text-light-gray w-78 md:w-74 mr-3 pr-3 hover:cursor-text":
                   isOpen,
               }
             )}

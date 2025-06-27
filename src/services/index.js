@@ -15,3 +15,5 @@ export { default as startQuiz } from "./startQuiz";
 export { default as endQuiz } from "./endQuiz";
 export { default as fetchLandingInfo } from "./fetchLandingInfo";
 export { default as fetchSocials } from "./fetchSocials";
+export { default as checkPasswordToken } from "./checkPasswordToken";
+export { default as checkEmailVerifyToken } from "./checkEmailVerifyToken";

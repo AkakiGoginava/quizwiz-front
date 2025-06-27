@@ -1,13 +1,37 @@
-import React from "react";
+import React, { useEffect } from "react";
 
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 
 import { loginCover } from "@/assets";
 import { useAuth } from "@/hook";
-import { AuthLayout, AuthForm } from "@/components";
+import { AuthLayout, AuthForm, ToastContent } from "@/components";
+import { checkEmailVerifyToken } from "@/services";
+import { toast } from "react-toastify";
+import { useMutation } from "@tanstack/react-query";
 
 function Login() {
   const { login } = useAuth();
+
+  const [searchParams] = useSearchParams();
+  const token = searchParams.get("token");
+
+  const mutation = useMutation({
+    mutationFn: checkEmailVerifyToken,
+    onError: (error) => {
+      toast.warning(
+        <ToastContent
+          title="Token expired"
+          message={error.response.data.message}
+        />
+      );
+    },
+  });
+
+  useEffect(() => {
+    if (token) {
+      mutation.mutate({ token });
+    }
+  }, [token]);
 
   const loginFields = [
     {
