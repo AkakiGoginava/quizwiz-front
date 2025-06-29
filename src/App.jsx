@@ -22,6 +22,7 @@ import {
   QuizSubmitPage,
 } from "@/pages";
 import { ToastContainer } from "react-toastify";
+import { NotFound } from "./pages";
 
 function App() {
   return (
@@ -48,6 +49,8 @@ function App() {
               <Route path="/reset-password" element={<ResetPassword />} />
             </Route>
           </Route>
+
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Layout>
 

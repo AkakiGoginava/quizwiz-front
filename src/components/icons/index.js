@@ -1,6 +1,7 @@
 export { default as ArrowLongIcon } from "./arrow-long-icon.svg?react";
 export { default as ArrowDiagonalIcon } from "./arrow-diagonal-icon.svg?react";
 export { default as ArrowShortIcon } from "./arrow-short-icon.svg?react";
+export { default as HomeArrowIcon } from "./home-arrow-icon.svg?react";
 export { default as AlertIcon } from "./alert-icon.svg?react";
 export { default as ArrowIcon } from "./arrow-icon.svg?react";
 export { default as EyeIcon } from "./eye-icon.svg?react";

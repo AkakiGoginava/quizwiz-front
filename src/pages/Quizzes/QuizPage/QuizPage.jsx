@@ -13,13 +13,13 @@ import {
 } from "@/components";
 import { formatTime } from "@/helper";
 import { useQuizPage } from "./useQuizPage";
+import { NotFound } from "@/pages";
 
 function QuizPage() {
   const { navigate, userQuizzes, isLoading, openQuiz, similarQuizzes } =
     useQuizPage();
 
-  if (!openQuiz)
-    return <div className="size-full text-center">Quiz not found.</div>;
+  if (!openQuiz) return <NotFound />;
   if (isLoading) return <div className="size-full text-center">Loading...</div>;
 
   return (
