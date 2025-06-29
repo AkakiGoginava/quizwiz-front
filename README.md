@@ -11,10 +11,7 @@ A modern React + Vite application for the QuizWiz platform.
   - [Development](#development)
   - [Environment Variables](#environment-variables)
   - [Production Build](#production-build)
-- [Deployment (Nginx Example)](#deployment-nginx-example)
-- [Custom Error Pages](#custom-error-pages)
-- [Contributing](#contributing)
-- [License](#license)
+- [Deployment](#deployment-nginx-example)
 
 ## Features
 
