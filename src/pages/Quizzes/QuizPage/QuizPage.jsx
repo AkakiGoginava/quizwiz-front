@@ -19,8 +19,8 @@ function QuizPage() {
   const { navigate, userQuizzes, isLoading, openQuiz, similarQuizzes } =
     useQuizPage();
 
-  if (!openQuiz) return <NotFound />;
   if (isLoading) return <div className="size-full text-center">Loading...</div>;
+  if (!openQuiz) return <NotFound />;
 
   return (
     <>

@@ -20,6 +20,7 @@ import {
   QuizPage,
   QuizzesLayout,
   QuizSubmitPage,
+  ServerError,
 } from "@/pages";
 import { ToastContainer } from "react-toastify";
 import { NotFound } from "./pages";
@@ -50,6 +51,7 @@ function App() {
             </Route>
           </Route>
 
+          <Route path="/server-error" element={<ServerError />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Layout>
