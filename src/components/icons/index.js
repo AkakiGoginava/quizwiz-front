@@ -1,6 +1,7 @@
 export { default as ArrowLongIcon } from "./arrow-long-icon.svg?react";
 export { default as ArrowDiagonalIcon } from "./arrow-diagonal-icon.svg?react";
 export { default as ArrowShortIcon } from "./arrow-short-icon.svg?react";
+export { default as HomeArrowIcon } from "./home-arrow-icon.svg?react";
 export { default as AlertIcon } from "./alert-icon.svg?react";
 export { default as ArrowIcon } from "./arrow-icon.svg?react";
 export { default as EyeIcon } from "./eye-icon.svg?react";
@@ -23,3 +24,9 @@ export { default as TimeIcon } from "./time-icon.svg?react";
 export { default as PinIcon } from "./pin-icon.svg?react";
 export { default as InfoIcon } from "./info-icon.svg?react";
 export { default as SuccessIcon } from "./success-icon.svg?react";
+export { default as MenuIcon } from "./menu-icon.svg?react";
+export { default as LinkIcon } from "./link-icon.svg?react";
+export { default as DragHandleIcon } from "./drag-handle-icon.svg?react";
+export { default as ToastSuccessIcon } from "./toast-success-icon.svg?react";
+export { default as ToastWarningIcon } from "./toast-warning-icon.svg?react";
+export { default as ToastErrorIcon } from "./toast-error-icon.svg?react";

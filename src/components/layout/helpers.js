@@ -1,6 +1,10 @@
 export const handleSubmit = function (e, navigate, inputRef) {
   e.preventDefault();
-  navigate(`/quizzes?title=${inputRef.current.value}`);
+
+  const params = new URLSearchParams(location.search);
+  params.set("title", inputRef.current.value);
+
+  navigate(`${location.pathname}?${params.toString()}`);
 };
 
 export const handleBackdropClick = (e, onClose) => {

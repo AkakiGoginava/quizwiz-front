@@ -16,7 +16,7 @@ function MultipleChoiceGroup({
   };
 
   return (
-    <div className="flex flex-wrap gap-2">
+    <div className="flex flex-wrap gap-4 md:gap-2">
       {choices.map((choice) => (
         <div key={choice.id}>
           <div
@@ -24,9 +24,9 @@ function MultipleChoiceGroup({
             style={
               selectedChoices.includes(String(choice.id))
                 ? { backgroundColor: choice?.color || "black", color: "#fff" }
-                : { color: choice?.color || "black" }
+                : { color: choice?.color || "#475467" }
             }
-            className="font-medium px-3 py-1 rounded-2xl transition hover:cursor-pointer hover:opacity-80"
+            className="px-3 py-2 md:py-1 rounded-2xl transition hover:cursor-pointer hover:opacity-80"
           >
             {choice.name}
           </div>

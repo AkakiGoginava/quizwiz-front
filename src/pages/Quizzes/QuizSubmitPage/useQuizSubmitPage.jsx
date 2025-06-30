@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 import { fetchQuiz } from "@/services";
 
@@ -10,7 +10,8 @@ import { useEndQuiz, useQuizTimer, useStartQuiz } from "./hooks";
 
 export const useQuizSubmitPage = () => {
   const { id: openQuizId } = useParams();
-  const { control, handleSubmit, getValues } = useForm();
+  const { control, handleSubmit, getValues, watch } = useForm();
+  const queryClient = useQueryClient();
 
   const [attemptId, setAttemptId] = useState(null);
   const [resultTime, setResultTime] = useState(null);
@@ -23,11 +24,10 @@ export const useQuizSubmitPage = () => {
     isSuccess: isSuccessStart,
   } = useStartQuiz(setAttemptId);
 
-  const {
-    mutate: endQuizMutate,
-    isPending: isPendingEnd,
-    isSuccess: isSuccessEnd,
-  } = useEndQuiz(setResultTime, setResultPoints);
+  const { mutate: endQuizMutate, isPending: isPendingEnd } = useEndQuiz(
+    setResultTime,
+    setResultPoints
+  );
 
   const { data, isLoading: isLoadingQuiz } = useQuery({
     queryKey: ["quiz", openQuizId],
@@ -44,6 +44,12 @@ export const useQuizSubmitPage = () => {
     }
   }, [openQuizId]);
 
+  useEffect(() => {
+    return () => {
+      queryClient.invalidateQueries({ queryKey: ["user"] });
+    };
+  }, [queryClient]);
+
   const [timeLeft, clearQuizTimer] = useQuizTimer(
     openQuiz?.max_time,
     attemptId,
@@ -53,24 +59,34 @@ export const useQuizSubmitPage = () => {
     setResultModalOpen
   );
 
+  const onSubmit = (answers) => {
+    clearQuizTimer();
+
+    setResultModalOpen(true);
+
+    return endQuizMutate({ quizId: openQuizId, attemptId, answers });
+  };
+
+  const watchedAnswers = watch("answers") || {};
+  const markedCount = Object.values(watchedAnswers).filter(
+    (answer) => answer !== undefined && answer.length > 0
+  ).length;
+
   return {
     control,
-    openQuizId,
     handleSubmit,
+    onSubmit,
     timeLeft,
-    clearQuizTimer,
     isLoadingQuiz,
     openQuiz,
     questions,
     isPendingStart,
     isSuccessStart,
-    attemptId,
-    endQuizMutate,
     isPendingEnd,
-    isSuccessEnd,
     resultPoints,
     resultTime,
     resultModalOpen,
     setResultModalOpen,
+    markedCount,
   };
 };

@@ -9,7 +9,7 @@ import { CheckmarkIcon } from "@/components";
 function ToggleRadioGroup({ type, options, value, onChange }) {
   const isSortType = type === "sort";
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-10 md:gap-4">
       {options.map((option) => (
         <label
           key={option.value}

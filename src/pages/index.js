@@ -4,3 +4,4 @@ export * from "./Login";
 export * from "./Register";
 export * from "./ResetPassword";
 export * from "./Quizzes";
+export * from "./Error";

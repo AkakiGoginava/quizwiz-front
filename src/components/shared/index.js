@@ -1,2 +1,3 @@
 export { default as DotList } from "./DotList";
 export { default as QuizCard } from "./QuizCard";
+export { default as ToastContent } from "./ToastContent";

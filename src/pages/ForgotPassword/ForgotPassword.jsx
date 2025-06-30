@@ -25,15 +25,13 @@ function Login() {
 
   return (
     <AuthLayout coverImg={forgotCover}>
-      <div className="flex flex-col gap-9.5">
-        <AuthForm
-          fields={forgotFields}
-          onSubmit={forgotPassword}
-          submitText="Send"
-          title="Forgot password?"
-          subTitle="Don't worry! It happens. Please enter the email associated with your account."
-        />
-      </div>
+      <AuthForm
+        fields={forgotFields}
+        onSubmit={forgotPassword}
+        submitText="Send"
+        title="Forgot password?"
+        subTitle="Don't worry! It happens. Please enter the email associated with your account."
+      />
     </AuthLayout>
   );
 }

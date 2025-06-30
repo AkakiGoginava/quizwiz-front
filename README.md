@@ -1,12 +1,71 @@
-# React + Vite
+# QuizWiz Front-End
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern React + Vite application for the QuizWiz platform.
 
-Currently, two official plugins are available:
+## Table of Contents
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [Features](#features)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+  - [Development](#development)
+  - [Environment Variables](#environment-variables)
+  - [Production Build](#production-build)
+- [Deployment](#deployment-nginx-example)
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- React 18 with Vite for fast development
+- Tailwind CSS for styling
+- React Router for SPA navigation
+- Axios for API requests
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js (v18 or newer recommended)
+- npm
+
+### Installation
+
+```bash
+npm install
+```
+
+### Development
+
+```bash
+npm run dev
+```
+
+- The app will run at http://app.local.test:5173 (see `vite.config.js`)
+- API requests use the URL in `.env` (`VITE_API_URL`)
+
+### Environment Variables
+
+- `.env` — for development
+- `.env.production` — for production
+
+Example:
+
+```
+VITE_API_URL=http://api.local.test:8000
+```
+
+### Production Build
+
+```bash
+npm run build
+```
+
+- Output is in the `dist/` folder
+
+## Deployment
+
+Build the app: `npm run build`
+
+## Backend
+
+- **Backend repository:** [quizwiz-back-end](https://github.com/RedberryInternship/quizwiz-back-akaki-goginava)
+- **API URL:** https://back-quizwiz.akaki-goginava.redberryinternship.ge

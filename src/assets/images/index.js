@@ -5,3 +5,5 @@ export { default as logo } from "./logo.png";
 export { default as registerCover } from "./register-cover.png";
 export { default as resetCover } from "./reset-cover.png";
 export { default as forgotCover } from "./forgot-cover.png";
+export { default as notFoundCover } from "./not-found-cover.png";
+export { default as serverErrorCover } from "./server-error-cover.png";

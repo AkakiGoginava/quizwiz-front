@@ -18,7 +18,10 @@ function CategoryCarousel({ categories, categoryFilter, setFilterState }) {
 
   return (
     <Carousel containerRef={containerRef}>
-      <div ref={containerRef} className="flex gap-4 overflow-hidden">
+      <div
+        ref={containerRef}
+        className="flex gap-4 overflow-scroll md:overflow-hidden"
+      >
         <CategoryButton
           isActive={categoryFilter.length === 0}
           onClick={() =>

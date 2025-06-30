@@ -1,13 +1,37 @@
-import React from "react";
+import React, { useEffect } from "react";
 
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 
 import { loginCover } from "@/assets";
 import { useAuth } from "@/hook";
-import { AuthLayout, AuthForm } from "@/components";
+import { AuthLayout, AuthForm, ToastContent } from "@/components";
+import { checkEmailVerifyToken } from "@/services";
+import { toast } from "react-toastify";
+import { useMutation } from "@tanstack/react-query";
 
 function Login() {
   const { login } = useAuth();
+
+  const [searchParams] = useSearchParams();
+  const token = searchParams.get("token");
+
+  const mutation = useMutation({
+    mutationFn: checkEmailVerifyToken,
+    onError: (error) => {
+      toast.warning(
+        <ToastContent
+          title="Token expired"
+          message={error.response.data.message}
+        />
+      );
+    },
+  });
+
+  useEffect(() => {
+    if (token) {
+      mutation.mutate({ token });
+    }
+  }, [token]);
 
   const loginFields = [
     {
@@ -41,25 +65,24 @@ function Login() {
 
   return (
     <AuthLayout coverImg={loginCover}>
-      <div className="flex flex-col gap-9.5">
-        <AuthForm
-          fields={loginFields}
-          onSubmit={login}
-          submitText="Log in"
-          title="Hi, Welcome! 👋"
-          hasForgotPassword={true}
-        />
-
-        <p className="text-sm text-gray-900">
-          Dont have an account?{" "}
-          <Link
-            className="font-semibold text-blue-600 hover:pinter-cursor hover:text-blue-500"
-            to="/register"
-          >
-            Sign up
-          </Link>
-        </p>
-      </div>
+      <AuthForm
+        fields={loginFields}
+        onSubmit={login}
+        submitText="Log in"
+        title="Hi, Welcome! 👋"
+        hasForgotPassword={true}
+        footer={
+          <p className="text-sm text-gray-900">
+            Dont have an account?{" "}
+            <Link
+              className="font-semibold text-blue-600 hover:pinter-cursor hover:text-blue-500"
+              to="/register"
+            >
+              Sign up
+            </Link>
+          </p>
+        }
+      />
     </AuthLayout>
   );
 }

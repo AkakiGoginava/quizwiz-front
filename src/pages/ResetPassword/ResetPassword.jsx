@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 
 import { resetCover } from "@/assets";
 import { useAuth } from "@/hook";
-import { AuthLayout, AuthForm } from "@/components";
+import { AuthLayout, AuthForm, ToastContent } from "@/components";
+import { checkPasswordToken } from "@/services";
+import { useMutation } from "@tanstack/react-query";
+import { toast } from "react-toastify";
 
 function ResetPassword() {
   const { resetPassword } = useAuth();
@@ -11,6 +14,24 @@ function ResetPassword() {
   const [searchParams] = useSearchParams();
   const token = searchParams.get("token");
   const email = searchParams.get("email");
+
+  const mutation = useMutation({
+    mutationFn: ({ token, email }) => checkPasswordToken(token, email),
+    onError: (error) => {
+      toast.warning(
+        <ToastContent
+          title="Invalid token"
+          message={error.response.data.message}
+        />
+      );
+    },
+  });
+
+  useEffect(() => {
+    if (token && email) {
+      mutation.mutate({ token, email });
+    }
+  }, [token, email]);
 
   const resetFields = [
     {
@@ -39,15 +60,15 @@ function ResetPassword() {
 
   return (
     <AuthLayout coverImg={resetCover}>
-      <div className="flex flex-col gap-9.5">
-        <AuthForm
-          fields={resetFields}
-          onSubmit={(data) => resetPassword({ ...data, token, email })}
-          submitText="Reset password"
-          title="Reset password"
-          subTitle="Please type something you'll remember"
-        />
-      </div>
+      <AuthForm
+        fields={resetFields}
+        onSubmit={(data, setError) =>
+          resetPassword({ ...data, token, email }, setError)
+        }
+        submitText="Reset password"
+        title="Reset password"
+        subTitle="Please type something you'll remember"
+      />
     </AuthLayout>
   );
 }
