@@ -20,7 +20,7 @@ function AuthLayout({ coverImg, children }) {
         />
       </div>
 
-      <div className="absolute top-35 md:static flex gap-16.5 pt-4 md:pt-0 bg-white w-screen md:w-auto h-screen md:h-auto z-60 md:z-0 rounded-t-3xl md:rounded-none">
+      <div className="absolute top-35 md:static flex gap-16.5 pt-4 md:pt-0 bg-white w-screen md:w-auto h-full z-60 md:z-0 rounded-t-3xl md:rounded-none">
         <Link to="/" className="absolute top-10 left-10 hidden md:block">
           <img src={logo} alt="logo" />
         </Link>
@@ -28,7 +28,7 @@ function AuthLayout({ coverImg, children }) {
         <img
           src={coverImg}
           alt="cover image"
-          className="w-auto h-auto max-w-none hidden md:block"
+          className="hidden md:block max-w-full h-auto"
         />
 
         <div className="flex flex-col">
