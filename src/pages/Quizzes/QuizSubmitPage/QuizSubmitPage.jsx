@@ -36,6 +36,14 @@ function QuizSubmitPage() {
 
   const formRef = useRef(null);
 
+  if (isLoadingQuiz || isPendingStart) {
+    return (
+      <div className="fixed inset-0 flex items-center justify-center bg-black/30 backdrop-blur-xs">
+        <SpinningWheelIcon className="size-37 animate-spin" strokeWidth={0.5} />
+      </div>
+    );
+  }
+
   if (!isSuccessStart) return <div>Could not start quiz</div>;
 
   const quizInfoItems = [
@@ -143,15 +151,6 @@ function QuizSubmitPage() {
           </div>
         </form>
       </section>
-
-      {(isLoadingQuiz || isPendingStart) && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black/30 backdrop-blur-xs">
-          <SpinningWheelIcon
-            className="size-37 animate-spin"
-            strokeWidth={0.5}
-          />
-        </div>
-      )}
     </div>
   );
 }
