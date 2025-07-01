@@ -53,7 +53,12 @@ function Footer() {
         {socialMedia?.map((social) => (
           <a
             key={social.id}
-            href={social.value}
+            href={
+              social.value.startsWith("http://") ||
+              social.value.startsWith("https://")
+                ? social.value
+                : `https://${social.value}`
+            }
             target="_blank"
             rel="noreferrer"
           >
