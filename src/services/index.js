@@ -1,5 +1,4 @@
 export { default as axiosInstance } from "./axios";
-export { default as checkUniqueInput } from "./checkUniqueInput";
 export { default as fetchUser } from "./fetchUser";
 export { default as loginUser } from "./loginUser";
 export { default as logoutUser } from "./logoutUser";
