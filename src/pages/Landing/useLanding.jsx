@@ -2,7 +2,7 @@ import { fetchLandingInfo } from "@/services";
 import { useQuery } from "@tanstack/react-query";
 
 export const useLanding = () => {
-  const { data } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["landingInfo"],
     queryFn: fetchLandingInfo,
   });
@@ -12,5 +12,6 @@ export const useLanding = () => {
   return {
     quizCount: quizzes_count,
     categoryCount: category_count,
+    isLoading,
   };
 };

@@ -8,7 +8,9 @@ import { LinkIcon } from "@/components";
 import { useLanding } from "./useLanding";
 
 function Landing() {
-  const { quizCount, categoryCount } = useLanding();
+  const { quizCount, categoryCount, isLoading } = useLanding();
+
+  if (isLoading) return <div className="w-full text-center">Loading...</div>;
 
   return (
     <div className="relative flex flex-col w-full">
@@ -23,7 +25,7 @@ function Landing() {
       />
 
       <div className="flex flex-col justify-center w-full bg-orange text-white font-raleway font-black pl-12 md:pl-24 pt-8 pb-14.5">
-        <p className="text-7.5xl">{quizCount ? quizCount : "N/A"}+</p>
+        <p className="text-7.5xl">{quizCount}+</p>
 
         <div className="flex items-center gap-4">
           <Link to="/quizzes" className="peer text-5xl hover:underline">
@@ -35,7 +37,7 @@ function Landing() {
       </div>
 
       <div className="flex flex-col justify-center w-full bg-blue text-white font-raleway font-black pl-12 md:pl-24 pb-9.5">
-        <p className="text-7.5xl">{categoryCount ? categoryCount : "N/A"}+</p>
+        <p className="text-7.5xl">{categoryCount}+</p>
 
         <div className="flex md:items-center gap-4">
           <Link
