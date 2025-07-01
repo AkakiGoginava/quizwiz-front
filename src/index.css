@@ -108,3 +108,9 @@
   background: radial-gradient(circle, #ffb13b 0%, transparent 70%);
   opacity: 0.15;
 }
+
+@media (max-width: 640px) {
+  .Toastify__toast {
+    border-radius: 0.625rem !important;
+  }
+}

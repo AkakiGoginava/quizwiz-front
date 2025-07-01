@@ -20,10 +20,10 @@ function Footer() {
     );
 
   const contacts =
-    data?.filter((item) => item.key === "email" || item.key === "phone") || [];
+    data?.filter((item) => item.key === "email" || item.key === "tel") || [];
 
   const socialMedia =
-    data?.filter((item) => item.key != "email" && item.key != "phone") || [];
+    data?.filter((item) => item.key != "email" && item.key != "tel") || [];
 
   return (
     <footer className="relative flex flex-col md:flex-row gap-10 md:gap-25 text-gray-600 text-sm px-10 py-6 md:px-24 md:pt-11 md:pb-6 border-t border-gray-300">
