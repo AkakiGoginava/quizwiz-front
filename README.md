@@ -45,12 +45,11 @@ npm run dev
 ### Environment Variables
 
 - `.env` — for development
-- `.env.production` — for production
 
-Example:
+Copy the example environment file and configure it:
 
-```
-VITE_API_URL=http://api.local.test:8000
+```bash
+cp .env.example .env
 ```
 
 ### Production Build
@@ -67,5 +66,4 @@ Build the app: `npm run build`
 
 ## Backend
 
-- **Backend repository:** [quizwiz-back-end](https://github.com/RedberryInternship/quizwiz-back-akaki-goginava)
-- **API URL:** https://back-quizwiz.akaki-goginava.redberryinternship.ge
+- **Backend repository:** [quizwiz-back-end](https://github.com/AkakiGoginava/quizwiz-back.git)
